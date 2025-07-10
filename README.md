@@ -2,25 +2,25 @@
 
 A modern, interactive portfolio website built with React, TypeScript, and advanced web technologies. Features a terminal-inspired design with smooth animations and professional styling.
 
-## 🚀 Features
+## Features
 
-- **Terminal-Inspired Design**: Modern terminal aesthetic with typing animations
-- **Smooth Animations**: Powered by Framer Motion and GSAP
-- **Responsive Design**: Fully responsive across all devices
-- **Interactive Elements**: Terminal playground, typing sounds, background music
-- **Professional Sections**: About, Skills, Projects, Contact sections
-- **Customizable Content**: All content managed through `src/content.ts`
+- Terminal-Inspired Design: Modern terminal aesthetic with typing animations
+- Smooth Animations: Powered by Framer Motion and GSAP
+- Responsive Design: Fully responsive across all devices
+- Interactive Elements: Terminal playground, typing sounds, background music
+- Professional Sections: About, Skills, Projects, Contact sections
+- Customizable Content: All content managed through `src/content.ts`
 
-## 🛠️ Tech Stack
+## Tech Stack
 
-- **Frontend**: React 18, TypeScript
-- **Build Tool**: Vite
-- **Styling**: Tailwind CSS
-- **Animations**: Framer Motion, GSAP, ScrollTrigger
-- **Smooth Scrolling**: Lenis
-- **Audio**: Custom typing sounds and background music
+- Frontend: React 18, TypeScript
+- Build Tool: Vite
+- Styling: Tailwind CSS
+- Animations: Framer Motion, GSAP, ScrollTrigger
+- Smooth Scrolling: Lenis
+- Audio: Custom typing sounds and background music
 
-## 📁 Project Structure
+## Project Structure
 
 ```
 src/
@@ -40,16 +40,16 @@ src/
 └── index.css          # Global styles and Tailwind
 ```
 
-## 🎨 Design Features
+## Design Features
 
-- **Glass Morphism**: Modern glass effects and blur
-- **Gradient Backgrounds**: Dynamic animated gradients
-- **Terminal Headers**: macOS-style terminal windows
-- **Progress Bars**: Animated skill progress indicators
-- **Hover Effects**: Smooth hover animations
-- **Particle System**: Floating animated particles
+- Glass Morphism: Modern glass effects and blur
+- Gradient Backgrounds: Dynamic animated gradients
+- Terminal Headers: macOS-style terminal windows
+- Progress Bars: Animated skill progress indicators
+- Hover Effects: Smooth hover animations
+- Particle System: Floating animated particles
 
-## 🚀 Getting Started
+## Getting Started
 
 ### Prerequisites
 
@@ -82,7 +82,7 @@ npm run dev
 npm run build
 ```
 
-## 📝 Customization
+## Customization
 
 All content is centralized in `src/content.ts`. You can easily modify:
 
@@ -92,15 +92,15 @@ All content is centralized in `src/content.ts`. You can easily modify:
 - Contact information
 - Section headings and descriptions
 
-## 🎯 Sections
+## Sections
 
-- **Hero**: Animated terminal with typing effect
-- **About**: Professional background and focus areas
-- **Skills**: Interactive skill bars with progress
-- **Projects**: Featured projects with tech stack
-- **Contact**: Contact information and social links
+- Hero: Animated terminal with typing effect
+- About: Professional background and focus areas
+- Skills: Interactive skill bars with progress
+- Projects: Featured projects with tech stack
+- Contact: Contact information and social links
 
-## 🔧 Development
+## Development
 
 ### Available Scripts
 
@@ -111,11 +111,11 @@ All content is centralized in `src/content.ts`. You can easily modify:
 
 ### Key Components
 
-- **App.tsx**: Main application with routing and animations
-- **content.ts**: Centralized content management
-- **index.css**: Global styles and Tailwind configuration
+- App.tsx: Main application with routing and animations
+- content.ts: Centralized content management
+- index.css: Global styles and Tailwind configuration
 
-## 📱 Responsive Design
+## Responsive Design
 
 The website is fully responsive and optimized for:
 - Desktop (1920px+)
@@ -123,24 +123,24 @@ The website is fully responsive and optimized for:
 - Tablet (768px)
 - Mobile (375px)
 
-## 🎵 Audio Features
+## Audio Features
 
 - Typing sound effects
 - Background music player
 - Audio controls and mute functionality
 
-## 🌟 Performance
+## Performance
 
 - Optimized animations with GSAP
 - Smooth scrolling with Lenis
 - Efficient React rendering
 - Minimal bundle size
 
-## 📄 License
+## License
 
-This project is open source and available under the [MIT License](LICENSE).
+This project is open source and available under the MIT License.
 
-## 👨‍💻 Author
+## Author
 
 **Orv** - Full-Stack Developer | Cybersecurity, AI & Telegram Bot Developer
 
@@ -149,4 +149,4 @@ This project is open source and available under the [MIT License](LICENSE).
 
 ---
 
-Built with ❤️ using React, TypeScript, and modern web technologies.
+Built with React, TypeScript, and modern web technologies.
