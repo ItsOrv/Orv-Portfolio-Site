@@ -82,6 +82,67 @@ npm run dev
 npm run build
 ```
 
+## Deployment
+
+### Netlify (Recommended)
+
+1. Build the project:
+```bash
+npm run build
+```
+
+2. Deploy to Netlify:
+   - Connect your GitHub repository to Netlify
+   - Set build command: `npm run build`
+   - Set publish directory: `dist`
+   - Deploy automatically on push to main branch
+
+### Vercel
+
+1. Install Vercel CLI:
+```bash
+npm i -g vercel
+```
+
+2. Deploy:
+```bash
+vercel
+```
+
+### GitHub Pages
+
+1. Add to package.json:
+```json
+{
+  "homepage": "https://yourusername.github.io/repository-name",
+  "scripts": {
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d dist"
+  }
+}
+```
+
+2. Install gh-pages:
+```bash
+npm install --save-dev gh-pages
+```
+
+3. Deploy:
+```bash
+npm run deploy
+```
+
+### Manual Deployment
+
+1. Build the project:
+```bash
+npm run build
+```
+
+2. Upload the `dist` folder to your web server
+
+3. Configure your server to serve `index.html` for all routes (SPA routing)
+
 ## Customization
 
 All content is centralized in `src/content.ts`. You can easily modify:
@@ -135,17 +196,6 @@ The website is fully responsive and optimized for:
 - Smooth scrolling with Lenis
 - Efficient React rendering
 - Minimal bundle size
-
-## License
-
-This project is open source and available under the MIT License.
-
-## Author
-
-**Orv** - Full-Stack Developer | Cybersecurity, AI & Telegram Bot Developer
-
-- GitHub: [@ItsOrv](https://github.com/ItsOrv)
-- Telegram: [@Pouria_Orv](https://t.me/Pouria_Orv)
 
 ---
 
