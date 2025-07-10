@@ -27,6 +27,8 @@ function App() {
   const meshMove2 = useTransform(scrollYProgress, [0, 1], ['100%', '0%'])
 
   useEffect(() => {
+    // Detect mobile device
+    const isMobile = /Android|iPhone|iPad|iPod|Opera Mini|IEMobile|WPDesktop/i.test(navigator.userAgent)
     // Initialize premium smooth scroll
     const lenis = new Lenis({
       duration: 1.6,
@@ -36,6 +38,7 @@ function App() {
       smoothWheel: true,
       wheelMultiplier: 1,
       touchMultiplier: 2,
+      ...(isMobile && { smooth: false }), // Fully disable Lenis smooth scroll on mobile
     })
 
     function raf(time: number) {
