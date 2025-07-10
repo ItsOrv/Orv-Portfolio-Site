@@ -198,7 +198,7 @@ function App() {
       {/* Main Executive Content */}
       <main className="relative z-10">
         {/* Hero Section - Massive ORV Title */}
-        <section className="executive-section min-h-screen flex items-center justify-center relative">
+        <section className="executive-section min-h-[100dvh] flex items-center justify-center relative">
           <div className="absolute inset-0 bg-gradient-to-b from-transparent via-slate-950/20 to-slate-950" />
           <div className="relative z-10 text-center space-y-12 px-6">
             {/* Giant ORV Logo */}
@@ -258,7 +258,7 @@ function App() {
           </div>
         </section>
         {/* About Section with Terminal Header */}
-        <section id="about" className="executive-section min-h-screen py-32">
+        <section id="about" className="executive-section min-h-[100dvh] py-32">
           <div className="container mx-auto px-6 max-w-7xl">
             {/* Terminal Header with macOS buttons */}
             <div className="executive-terminal mb-16 p-0 bg-transparent border-none shadow-none">
@@ -284,7 +284,7 @@ function App() {
           </div>
         </section>
         {/* Skills Section with Terminal Header */}
-        <section id="skills" className="executive-section min-h-screen py-32 relative">
+        <section id="skills" className="executive-section min-h-[100dvh] py-32 relative">
           <div className="parallax-executive absolute inset-0 bg-gradient-to-b from-slate-900/20 to-transparent" />
           <div className="container mx-auto px-6 max-w-7xl relative z-10">
             {/* Terminal Header with macOS buttons */}
@@ -311,7 +311,7 @@ function App() {
           </div>
         </section>
         {/* Projects Section with Terminal Header */}
-        <section id="projects" className="executive-section min-h-screen py-32">
+        <section id="projects" className="executive-section min-h-[100dvh] py-32">
           <div className="container mx-auto px-6 max-w-7xl">
             {/* Terminal Header with macOS buttons */}
             <div className="executive-terminal mb-16 p-0 bg-transparent border-none shadow-none">
@@ -337,7 +337,7 @@ function App() {
           </div>
         </section>
         {/* Contact Section with Terminal Header */}
-        <section id="contact" className="executive-section min-h-screen py-32 relative">
+        <section id="contact" className="executive-section min-h-[100dvh] py-32 relative">
           <div className="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/80 to-transparent" />
           <div className="container mx-auto px-6 max-w-7xl relative z-10">
             {/* Terminal Header with macOS buttons */}
@@ -364,7 +364,7 @@ function App() {
           </div>
         </section>
         {/* Extended Footer Section - Full Height */}
-        <section className="executive-section min-h-screen py-32 bg-slate-950 border-t border-slate-800/50 flex items-center justify-center">
+        <section className="executive-section min-h-[100dvh] py-32 bg-slate-950 border-t border-slate-800/50 flex items-center justify-center">
           <div className="container mx-auto px-6 text-center">
             <div className="space-y-8">
               <div className="flex items-center justify-center gap-2">
