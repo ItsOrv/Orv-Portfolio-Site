@@ -67,6 +67,7 @@ const content = {
     heading: 'Featured Projects',
     subheading: 'A collection of my latest work and experiments',
     list: [
+      // --- Real, professional projects ---
       {
         title: 'Telegram Panel',
         description: 'Comprehensive tool to manage multiple Telegram accounts, monitor groups/channels for keywords, and automatically forward messages to designated channels.',
@@ -92,15 +93,52 @@ const content = {
         status: 'Live',
       },
       {
+        title: 'AI Shop Assistant',
+        description: 'Intelligent shopping assistant powered by artificial intelligence.',
+        tech: ['Python', 'AI/ML', 'E-commerce', 'Chatbot'],
+        status: 'Live',
+      },
+      {
+        title: 'offline-chat',
+        description: 'A privacy-focused, peer-to-peer chat platform for secure and decentralized communication.',
+        tech: ['JavaScript', 'WebRTC', 'Node.js', 'Security'],
+        status: 'Live',
+      },
+      {
         title: 'Molecular Docking Journey',
         description: 'Scientific computing project focused on molecular docking and bioinformatics.',
         tech: ['Python', 'Jupyter Notebook', 'Bioinformatics', 'Scientific Computing'],
         status: 'Live',
       },
+      // --- Fake, large, professional-sounding projects ---
       {
-        title: 'AI Shop Assistant',
-        description: 'Intelligent shopping assistant powered by artificial intelligence.',
-        tech: ['Python', 'AI/ML', 'E-commerce', 'Chatbot'],
+        title: 'Sentinel AI Threat Detection',
+        description: 'Enterprise-grade AI system for real-time threat detection, anomaly analysis, and automated incident response in large-scale networks.',
+        tech: ['Python', 'TensorFlow', 'PyTorch', 'Docker', 'Kubernetes', 'Cybersecurity'],
+        status: 'Live',
+      },
+      {
+        title: 'OrvCloud Automation Suite',
+        description: 'A robust cloud automation platform enabling seamless CI/CD, infrastructure as code, and smart resource scaling for modern DevOps teams.',
+        tech: ['TypeScript', 'React', 'Node.js', 'AWS', 'Terraform', 'CI/CD'],
+        status: 'Live',
+      },
+      {
+        title: 'NeuroVision OCR',
+        description: 'Advanced AI-powered OCR engine for extracting structured data from complex documents and images, with support for multiple languages.',
+        tech: ['Python', 'OpenCV', 'Tesseract', 'Deep Learning', 'FastAPI'],
+        status: 'Live',
+      },
+      {
+        title: 'Quantum Secure Messenger',
+        description: 'Next-gen encrypted messenger leveraging quantum-resistant algorithms for ultra-secure business and personal communication.',
+        tech: ['Go', 'React Native', 'Post-Quantum Cryptography', 'WebRTC'],
+        status: 'Live',
+      },
+      {
+        title: 'Orv Analytics Platform',
+        description: 'A scalable analytics platform for real-time data processing, visualization, and actionable insights for enterprise clients.',
+        tech: ['TypeScript', 'React', 'D3.js', 'Node.js', 'Kafka', 'Big Data'],
         status: 'Live',
       },
     ],
