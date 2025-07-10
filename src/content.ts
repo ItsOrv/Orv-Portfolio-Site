@@ -95,7 +95,7 @@ const content = {
         title: 'Molecular Docking Journey',
         description: 'Scientific computing project focused on molecular docking and bioinformatics.',
         tech: ['Python', 'Jupyter Notebook', 'Bioinformatics', 'Scientific Computing'],
-        status: 'In Progress',
+        status: 'Live',
       },
       {
         title: 'AI Shop Assistant',
