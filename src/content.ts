@@ -152,9 +152,24 @@ const content = {
     heading: "Let's Connect",
     subheading: 'Ready to discuss your next project or collaboration',
     info: [
-      { icon: 'blue', label: 'contact@orv.dev' },
-      { icon: 'purple', label: 'GitHub: github.com/ItsOrv' },
-      { icon: 'indigo', label: 'Telegram: t.me/Pouria_Orv' },
+      { 
+        icon: 'blue', 
+        label: 'contact@orv.dev',
+        href: 'mailto:contact@orv.dev',
+        type: 'email'
+      },
+      { 
+        icon: 'purple', 
+        label: 'GitHub: github.com/ItsOrv',
+        href: 'https://github.com/ItsOrv',
+        type: 'github'
+      },
+      { 
+        icon: 'indigo', 
+        label: 'Telegram: t.me/Pouria_Orv',
+        href: 'https://t.me/Pouria_Orv',
+        type: 'telegram'
+      },
     ],
   },
   footer: {

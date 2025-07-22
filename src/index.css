@@ -235,6 +235,21 @@
            bg-gradient-to-r from-purple-500/10 to-indigo-500/10 
            text-purple-300 border border-purple-500/20 backdrop-blur-sm;
   }
+
+  /* Contact button animations */
+  .contact-button {
+    @apply relative overflow-hidden;
+  }
+
+  .contact-button::before {
+    content: '';
+    @apply absolute inset-0 bg-gradient-to-r from-transparent via-white/5 to-transparent
+           transform -translate-x-full transition-transform duration-700 ease-out;
+  }
+
+  .contact-button:hover::before {
+    @apply translate-x-full;
+  }
 }
 
 @layer utilities {
