@@ -26,6 +26,17 @@ function App() {
   const gradientRotation = useTransform(scrollYProgress, [0, 1], [0, 360])
   const meshMove1 = useTransform(scrollYProgress, [0, 1], ['0%', '100%'])
   const meshMove2 = useTransform(scrollYProgress, [0, 1], ['100%', '0%'])
+  const meshScale1 = useTransform(scrollYProgress, [0, 1], [1, 1.5])
+  const meshScale2 = useTransform(scrollYProgress, [0, 1], [1, 0.8])
+  const meshScale3 = useTransform(scrollYProgress, [0, 1], [1, 1.2])
+  const gridScale = useTransform(scrollYProgress, [0, 1], [1, 1.1])
+
+  // Particle scroll animations - create transforms for each particle
+  const particleTransforms = Array.from({ length: 20 }, (_, i) => ({
+    y: useTransform(scrollYProgress, [0, 1], [0, -200 - i * 10]),
+    x: useTransform(scrollYProgress, [0, 1], [0, (i % 2 === 0 ? 1 : -1) * (50 + i * 5)]),
+    opacity: useTransform(scrollYProgress, [0, 0.5, 1], [0.3, 0.8, 0.2])
+  }))
 
   useEffect(() => {
     // Detect mobile device
@@ -111,22 +122,39 @@ function App() {
         {/* Advanced animated gradient mesh */}
         <div className="absolute inset-0">
           <motion.div 
-            style={{ x: meshMove1, y: meshMove2 }}
+            style={{ 
+              x: meshMove1, 
+              y: meshMove2,
+              scale: meshScale1
+            }}
             className="absolute top-0 left-1/4 w-96 h-96 bg-blue-500/10 rounded-full blur-3xl"
           />
           <motion.div 
-            style={{ x: meshMove2, y: meshMove1, rotate: gradientRotation }}
+            style={{ 
+              x: meshMove2, 
+              y: meshMove1, 
+              rotate: gradientRotation,
+              scale: meshScale2
+            }}
             className="absolute top-1/3 right-1/4 w-80 h-80 bg-indigo-500/10 rounded-full blur-3xl"
           />
           <motion.div 
-            style={{ x: meshMove1, y: meshMove2 }}
+            style={{ 
+              x: meshMove1, 
+              y: meshMove2,
+              scale: meshScale3
+            }}
             className="absolute bottom-1/4 left-1/3 w-72 h-72 bg-purple-500/10 rounded-full blur-3xl"
           />
         </div>
 
-        {/* Enhanced executive grid pattern */}
+        {/* Enhanced executive grid pattern with parallax */}
         <motion.div 
-          style={{ y: backgroundY, rotate: gradientRotation }}
+          style={{ 
+            y: backgroundY, 
+            rotate: gradientRotation,
+            scale: gridScale
+          }}
           className="absolute inset-0 grid-executive opacity-20"
         />
         
@@ -136,25 +164,27 @@ function App() {
           className="absolute inset-0 noise-texture"
         />
 
-        {/* Premium floating particles with scroll animation */}
+        {/* Premium floating particles with smooth scroll animation */}
         <div className="absolute inset-0">
-          {[...Array(20)].map((_, i) => (
+          {particleTransforms.map((transform, i) => (
             <motion.div
               key={i}
-              className="absolute w-2 h-2 bg-blue-400/30 rounded-full floating-element"
+              className="absolute w-2 h-2 bg-blue-400/30 rounded-full"
               style={{
                 left: `${(i * 5.26) % 100}%`,
                 top: `${(i * 7.37) % 100}%`,
+                x: transform.x,
+                y: transform.y,
+                opacity: transform.opacity,
               }}
               animate={{
-                y: [-10, 10],
-                opacity: [0.3, 0.7, 0.3],
+                scale: [1, 1.2, 1],
               }}
               transition={{
-                duration: 3 + (i % 3),
+                duration: 4 + (i % 3),
                 repeat: Infinity,
                 ease: "easeInOut",
-                delay: i * 0.1,
+                delay: i * 0.2,
               }}
             />
           ))}
