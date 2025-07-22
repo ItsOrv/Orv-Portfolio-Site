@@ -282,6 +282,16 @@
     @apply transition-all duration-300 hover:shadow-glow-blue;
   }
 
+  /* Premium shadows */
+  .shadow-glow-blue {
+    box-shadow: 0 0 30px rgba(59, 130, 246, 0.3);
+  }
+
+  /* Missing animate-blink */
+  .animate-blink {
+    animation: blink 1s infinite;
+  }
+
   /* Executive grid patterns */
   .grid-executive {
     background-image: 

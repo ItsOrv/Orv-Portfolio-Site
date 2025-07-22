@@ -28,7 +28,7 @@ const GlitchTransition = () => {
     }, 1500)
 
     return () => clearInterval(timer)
-  }, [])
+  }, [glitchMessages.length])
 
   useEffect(() => {
     // Trigger glitch effect periodically

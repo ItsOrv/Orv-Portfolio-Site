@@ -20,6 +20,7 @@ function App() {
   const backgroundY = useTransform(scrollYProgress, [0, 1], ['0%', '50%'])
   const progressWidth = useTransform(scrollYProgress, [0, 1], ['0%', '100%'])
   const headerOpacity = useTransform(scrollYProgress, [0, 0.1], [0, 1])
+  const noiseOpacity = useTransform(scrollYProgress, [0, 1], [0.4, 0.2])
   
   // Advanced background animations
   const gradientRotation = useTransform(scrollYProgress, [0, 1], [0, 360])
@@ -51,10 +52,10 @@ function App() {
     // Fixed GSAP animations - no jumping
     const sections = gsap.utils.toArray('.executive-section')
     
-    sections.forEach((section: any, index: number) => {
+    sections.forEach((section, index: number) => {
       const tl = gsap.timeline({
         scrollTrigger: {
-          trigger: section,
+          trigger: section as Element,
           start: 'top 90%',
           end: 'bottom 10%',
           toggleActions: 'play none none reverse',
@@ -63,13 +64,13 @@ function App() {
       })
 
       // Smooth entrance animation without jumping
-      gsap.set(section, { 
+      gsap.set(section as Element, { 
         opacity: 0, 
         y: 50,
         scale: 0.98,
       })
 
-      tl.to(section, { 
+      tl.to(section as Element, { 
         opacity: 1, 
         y: 0, 
         scale: 1,
@@ -131,7 +132,7 @@ function App() {
         
         {/* Animated noise texture overlay */}
         <motion.div 
-          style={{ opacity: useTransform(scrollYProgress, [0, 1], [0.4, 0.2]) }}
+          style={{ opacity: noiseOpacity }}
           className="absolute inset-0 noise-texture"
         />
 
@@ -140,21 +141,20 @@ function App() {
           {[...Array(20)].map((_, i) => (
             <motion.div
               key={i}
-              className="absolute w-2 h-2 bg-blue-400/30 rounded-full"
+              className="absolute w-2 h-2 bg-blue-400/30 rounded-full floating-element"
               style={{
-                left: `${Math.random() * 100}%`,
-                top: `${Math.random() * 100}%`,
-                y: useTransform(scrollYProgress, [0, 1], [0, -100 * Math.random()]),
+                left: `${(i * 5.26) % 100}%`,
+                top: `${(i * 7.37) % 100}%`,
               }}
               animate={{
                 y: [-10, 10],
                 opacity: [0.3, 0.7, 0.3],
               }}
               transition={{
-                duration: 3 + Math.random() * 2,
+                duration: 3 + (i % 3),
                 repeat: Infinity,
                 ease: "easeInOut",
-                delay: Math.random() * 2,
+                delay: i * 0.1,
               }}
             />
           ))}

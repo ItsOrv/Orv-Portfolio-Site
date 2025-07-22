@@ -1,6 +1,7 @@
 import { useState, useRef } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
-import { useTypeSound, TypeSoundPreload } from './TypeSound'
+import { useTypeSound } from '../utils/typeSound'
+import TypeSoundPreload from './TypeSound'
 import { Terminal, X } from 'lucide-react'
 
 const COMMANDS: Record<string, string> = {

@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
-import { useTypeSound, TypeSoundPreload } from './TypeSound'
+import { useTypeSound } from '../utils/typeSound'
+import TypeSoundPreload from './TypeSound'
 
 const BootScreen = () => {
   const [currentLine, setCurrentLine] = useState(0)
@@ -34,7 +35,7 @@ const BootScreen = () => {
     }, 800)
 
     return () => clearInterval(timer)
-  }, [])
+  }, [bootLines.length, typeSound])
 
   return (
     <div className="w-full h-full flex items-center justify-center bg-terminal-bg">

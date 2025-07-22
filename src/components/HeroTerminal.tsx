@@ -1,7 +1,8 @@
 import { useEffect, useState } from 'react'
 import { motion } from 'framer-motion'
 import { AnimatePresence } from 'framer-motion'
-import { useTypeSound, TypeSoundPreload } from './TypeSound'
+import { useTypeSound } from '../utils/typeSound'
+import TypeSoundPreload from './TypeSound'
 
 const HeroTerminal = () => {
   const [command, setCommand] = useState('')
@@ -39,7 +40,7 @@ const HeroTerminal = () => {
     }, 100)
 
     return () => clearInterval(commandTimer)
-  }, [])
+  }, [typeSound])
 
   useEffect(() => {
     if (!showOutput) return
@@ -57,7 +58,7 @@ const HeroTerminal = () => {
     }, 200)
 
     return () => clearInterval(outputTimer)
-  }, [showOutput])
+  }, [showOutput, outputLines.length, typeSound])
 
   return (
     <div className="w-full h-full flex items-center justify-center bg-terminal-bg">
