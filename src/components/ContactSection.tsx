@@ -1,8 +1,31 @@
 import { motion } from 'framer-motion'
 import { Mail, Github, Send, ExternalLink } from 'lucide-react'
-import { contact } from '../content'
 
 const ContactSection = () => {
+  const contactInfo = [
+    {
+      type: 'email',
+      label: 'contact@orv.dev',
+      href: 'mailto:contact@orv.dev',
+      icon: 'blue',
+      description: 'Send me an email'
+    },
+    {
+      type: 'github',
+      label: 'github.com/ItsOrv',
+      href: 'https://github.com/ItsOrv',
+      icon: 'purple',
+      description: 'Follow me on GitHub'
+    },
+    {
+      type: 'telegram',
+      label: 't.me/Pouria_Orv',
+      href: 'https://t.me/Pouria_Orv',
+      icon: 'indigo',
+      description: 'Chat on Telegram'
+    }
+  ]
+
   const getIcon = (type: string) => {
     switch (type) {
       case 'email':
@@ -25,9 +48,9 @@ const ContactSection = () => {
         viewport={{ once: true }}
         className="text-center mb-16"
       >
-        <h2 className="heading-section mb-8">{contact.heading}</h2>
+        <h2 className="heading-section mb-8">Let's Connect</h2>
         <p className="subheading-executive mx-auto">
-          {contact.subheading}
+          Ready to discuss your next project or collaboration
         </p>
       </motion.div>
 
@@ -42,44 +65,45 @@ const ContactSection = () => {
           <div className="premium-card-content">
             <h3 className="text-2xl font-bold text-slate-200 mb-8 text-center">Get In Touch</h3>
             <div className="space-y-4">
-              {contact.info.map((item, index) => (
-                <motion.a
-                  key={item.label}
+              {contactInfo.map((item) => (
+                <a
+                  key={item.type}
                   href={item.href}
                   target={item.type === 'email' ? '_self' : '_blank'}
                   rel={item.type === 'email' ? '' : 'noopener noreferrer'}
-                  initial={{ opacity: 0, x: -20 }}
-                  whileInView={{ opacity: 1, x: 0 }}
-                  transition={{ duration: 0.5, delay: index * 0.1 }}
-                  viewport={{ once: true }}
-                  className="contact-button group flex items-center justify-between p-4 bg-slate-800/30 hover:bg-slate-700/40 
+                  className="contact-button group block p-4 bg-slate-800/30 hover:bg-slate-700/40 
                            rounded-xl transition-all duration-300 hover:scale-[1.02] hover:shadow-lg
-                           border border-slate-700/30 hover:border-slate-600/50 hover:shadow-glow-blue"
+                           border border-slate-700/30 hover:border-slate-600/50 hover:shadow-glow-blue
+                           text-decoration-none"
+                  style={{ textDecoration: 'none' }}
                 >
-                  <div className="flex items-center space-x-4">
-                    <div className={`flex items-center justify-center w-10 h-10 rounded-full bg-${item.icon}-500/20 
-                                   text-${item.icon}-400 group-hover:bg-${item.icon}-500/30 transition-colors duration-300`}>
-                      {getIcon(item.type)}
-                    </div>
-                    <div className="flex flex-col">
-                      <span className="text-slate-200 font-medium group-hover:text-white transition-colors duration-300">
-                        {item.type === 'email' ? item.label : item.label.split(': ')[1]}
-                      </span>
-                      {item.type !== 'email' && (
-                        <span className="text-slate-500 text-sm">
-                          {item.type === 'github' ? 'Follow me on GitHub' : 'Chat on Telegram'}
+                  <div className="flex items-center justify-between">
+                    <div className="flex items-center space-x-4">
+                      <div className={`flex items-center justify-center w-10 h-10 rounded-full
+                                     ${item.icon === 'blue' ? 'bg-blue-500/20 text-blue-400 group-hover:bg-blue-500/30' : ''}
+                                     ${item.icon === 'purple' ? 'bg-purple-500/20 text-purple-400 group-hover:bg-purple-500/30' : ''}
+                                     ${item.icon === 'indigo' ? 'bg-indigo-500/20 text-indigo-400 group-hover:bg-indigo-500/30' : ''}
+                                     transition-colors duration-300`}>
+                        {getIcon(item.type)}
+                      </div>
+                      <div className="flex flex-col">
+                        <span className="text-slate-200 font-medium group-hover:text-white transition-colors duration-300">
+                          {item.label}
                         </span>
-                      )}
+                        <span className="text-slate-500 text-sm">
+                          {item.description}
+                        </span>
+                      </div>
+                    </div>
+                    
+                    <div className="flex items-center space-x-2 text-slate-400 group-hover:text-slate-300 transition-colors duration-300">
+                      <span className="text-sm font-mono">
+                        {item.type === 'email' ? 'Send Email' : 'Open'}
+                      </span>
+                      <ExternalLink className="w-4 h-4 transform group-hover:translate-x-1 transition-transform duration-300" />
                     </div>
                   </div>
-                  
-                  <div className="flex items-center space-x-2 text-slate-400 group-hover:text-slate-300 transition-colors duration-300">
-                    <span className="text-sm font-mono">
-                      {item.type === 'email' ? 'Send Email' : 'Open'}
-                    </span>
-                    <ExternalLink className="w-4 h-4 transform group-hover:translate-x-1 transition-transform duration-300" />
-                  </div>
-                </motion.a>
+                </a>
               ))}
             </div>
           </div>
