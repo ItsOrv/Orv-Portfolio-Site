@@ -1,0 +1,22 @@
+{
+  "name": "Pouria Orv - Full-Stack Developer & AI Specialist",
+  "short_name": "Pouria Orv",
+  "description": "Professional portfolio of Pouria Orv - Full-Stack Developer specializing in Python, React, and AI solutions",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#0f172a",
+  "theme_color": "#3b82f6",
+  "orientation": "portrait-primary",
+  "icons": [
+    {
+      "src": "/vite.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ],
+  "categories": ["portfolio", "developer", "technology"],
+  "lang": "en",
+  "scope": "/",
+  "screenshots": []
+}
