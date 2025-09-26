@@ -1,5 +1,4 @@
 import { useEffect, useRef, Suspense, lazy } from 'react'
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
 import Lenis from 'lenis'
 import { motion, useScroll, useTransform } from 'framer-motion'
 import { gsap } from 'gsap'
@@ -14,7 +13,6 @@ const ContactSection = lazy(() => import('./components/ContactSection'))
 const BackgroundMusic = lazy(() => import('./components/BackgroundMusic'))
 const ErrorBoundary = lazy(() => import('./components/ErrorBoundary'))
 const MobileMenu = lazy(() => import('./components/MobileMenu'))
-const ProjectDetail = lazy(() => import('./components/ProjectDetail'))
 
 gsap.registerPlugin(ScrollTrigger)
 
@@ -149,12 +147,9 @@ function App() {
   }, [])
 
   return (
-    <Router basename="/Orv-Site">
-      <Suspense fallback={<div className="min-h-screen bg-slate-950 flex items-center justify-center"><div className="premium-card animate-pulse h-64 w-64" /></div>}>
-        <ErrorBoundary>
-          <Routes>
-            <Route path="/" element={
-              <div ref={containerRef} className="relative overflow-hidden">
+    <Suspense fallback={<div className="min-h-screen bg-slate-950 flex items-center justify-center"><div className="premium-card animate-pulse h-64 w-64" /></div>}>
+      <ErrorBoundary>
+        <div ref={containerRef} className="relative overflow-hidden">
       {/* Clean static background */}
       <div className="fixed inset-0 bg-slate-950" />
 
@@ -420,13 +415,9 @@ function App() {
       <Suspense fallback={null}>
         <BackgroundMusic />
       </Suspense>
-              </div>
-            } />
-            <Route path="/project/:id" element={<ProjectDetail />} />
-          </Routes>
-        </ErrorBoundary>
-      </Suspense>
-    </Router>
+        </div>
+      </ErrorBoundary>
+    </Suspense>
   )
 }
 

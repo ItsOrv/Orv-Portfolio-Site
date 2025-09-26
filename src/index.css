@@ -370,6 +370,12 @@
 
   /* Removed animated background elements for cleaner experience */
 
+  /* Modal styles */
+  .modal-backdrop {
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+  }
+
   /* Executive focus states */
   .focus-executive {
     @apply focus:outline-none focus:ring-4 focus:ring-blue-500/20 focus:border-blue-500/50;

@@ -1,37 +1,52 @@
 import { motion } from 'framer-motion'
-import { Link } from 'react-router-dom'
+import { useState } from 'react'
 import { projects } from '../content'
 import { getFeaturedProjects } from '../data/projects'
+import ProjectModal from './ProjectModal'
+import type { Project } from '../types/project'
 
 const ProjectsSection = () => {
   const featuredProjects = getFeaturedProjects()
+  const [selectedProject, setSelectedProject] = useState<Project | null>(null)
+  const [isModalOpen, setIsModalOpen] = useState(false)
+
+  const openModal = (project: Project) => {
+    setSelectedProject(project)
+    setIsModalOpen(true)
+  }
+
+  const closeModal = () => {
+    setIsModalOpen(false)
+    setSelectedProject(null)
+  }
 
   return (
-    <div className="space-y-12">
-      <motion.div
-        initial={{ opacity: 0, y: 30 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.8 }}
-        viewport={{ once: true }}
-        className="text-center mb-16"
-      >
-        <h2 className="heading-section mb-8">{projects.heading}</h2>
-        <p className="subheading-executive mx-auto">
-          {projects.subheading}
-        </p>
-      </motion.div>
+    <>
+      <div className="space-y-12">
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8 }}
+          viewport={{ once: true }}
+          className="text-center mb-16"
+        >
+          <h2 className="heading-section mb-8">{projects.heading}</h2>
+          <p className="subheading-executive mx-auto">
+            {projects.subheading}
+          </p>
+        </motion.div>
 
-      <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-        {featuredProjects.map((project, index) => (
-          <motion.div
-            key={project.id}
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: index * 0.1 }}
-            viewport={{ once: true }}
-            className="project-showcase hover-lift-executive group"
-          >
-            <Link to={`/project/${project.id}`} className="block h-full">
+        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+          {featuredProjects.map((project, index) => (
+            <motion.div
+              key={project.id}
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: index * 0.1 }}
+              viewport={{ once: true }}
+              className="project-showcase hover-lift-executive group cursor-pointer"
+              onClick={() => openModal(project)}
+            >
               <div className="premium-card-content h-full flex flex-col">
                 <div className="flex justify-between items-start mb-4">
                   <h3 className="text-xl font-bold text-slate-200 group-hover:text-white transition-colors">
@@ -68,11 +83,18 @@ const ProjectsSection = () => {
                   </span>
                 </div>
               </div>
-            </Link>
-          </motion.div>
-        ))}
+            </motion.div>
+          ))}
+        </div>
       </div>
-    </div>
+
+      {/* Project Modal */}
+      <ProjectModal 
+        project={selectedProject} 
+        isOpen={isModalOpen} 
+        onClose={closeModal} 
+      />
+    </>
   )
 }
 
