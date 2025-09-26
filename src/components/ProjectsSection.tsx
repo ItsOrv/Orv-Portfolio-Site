@@ -11,7 +11,6 @@ const ProjectsSection = () => {
   const [isModalOpen, setIsModalOpen] = useState(false)
 
   const openModal = (project: Project) => {
-    console.log('Opening modal for project:', project.title)
     setSelectedProject(project)
     setIsModalOpen(true)
   }
@@ -35,13 +34,6 @@ const ProjectsSection = () => {
           <p className="subheading-executive mx-auto">
             {projects.subheading}
           </p>
-          {/* Test Button */}
-          <button 
-            onClick={() => openModal(featuredProjects[0])}
-            className="btn-executive mt-4"
-          >
-            Test Modal
-          </button>
         </motion.div>
 
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
