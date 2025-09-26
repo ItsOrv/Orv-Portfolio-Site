@@ -1,15 +1,18 @@
-import { useEffect, useRef } from 'react'
+import { useEffect, useRef, Suspense, lazy } from 'react'
 import Lenis from 'lenis'
 import { motion, useScroll, useTransform } from 'framer-motion'
 import { gsap } from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import { hero, about, skills, projects, contact, footer } from './content'
-// Components
-import AboutSection from './components/AboutSection'
-import SkillsSection from './components/SkillsSection'
-import ProjectsSection from './components/ProjectsSection'
-import ContactSection from './components/ContactSection'
-import BackgroundMusic from './components/BackgroundMusic'
+
+// Lazy load components for better performance
+const AboutSection = lazy(() => import('./components/AboutSection'))
+const SkillsSection = lazy(() => import('./components/SkillsSection'))
+const ProjectsSection = lazy(() => import('./components/ProjectsSection'))
+const ContactSection = lazy(() => import('./components/ContactSection'))
+const BackgroundMusic = lazy(() => import('./components/BackgroundMusic'))
+const ErrorBoundary = lazy(() => import('./components/ErrorBoundary'))
+const MobileMenu = lazy(() => import('./components/MobileMenu'))
 
 gsap.registerPlugin(ScrollTrigger)
 
@@ -116,7 +119,9 @@ function App() {
   }, [])
 
   return (
-    <div ref={containerRef} className="relative overflow-hidden">
+    <Suspense fallback={<div className="min-h-screen bg-slate-950 flex items-center justify-center"><div className="premium-card animate-pulse h-64 w-64" /></div>}>
+      <ErrorBoundary>
+        <div ref={containerRef} className="relative overflow-hidden">
       {/* Enhanced Executive Background System */}
       <div className="fixed inset-0 overflow-hidden pointer-events-none">
         {/* Advanced animated gradient mesh */}
@@ -195,30 +200,45 @@ function App() {
       <motion.header 
         style={{ opacity: headerOpacity }}
         className="nav-executive"
+        role="banner"
+        aria-label="Main navigation"
       >
         <div className="container mx-auto px-6 py-4">
           <div className="flex items-center justify-between">
             <div className="flex items-center space-x-2">
-              <div className="w-2 h-2 bg-emerald-400 rounded-full animate-pulse" />
+              <div className="w-2 h-2 bg-emerald-400 rounded-full animate-pulse" aria-hidden="true" />
               <span className="font-mono text-sm text-slate-400">Orv.dev</span>
             </div>
-            <nav className="hidden md:flex items-center space-x-8">
+            <nav className="hidden md:flex items-center space-x-8" role="navigation" aria-label="Main menu">
               {['About', 'Skills', 'Projects', 'Contact'].map((item) => (
                 <a
                   key={item}
                   href={`#${item.toLowerCase()}`}
-                  className="text-sm font-medium text-slate-400 hover:text-slate-200 transition-colors duration-200"
+                  className="text-sm font-medium text-slate-400 hover:text-slate-200 transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 focus:ring-offset-slate-950 rounded"
+                  aria-label={`Navigate to ${item} section`}
                 >
                   {item}
                 </a>
               ))}
             </nav>
+            
+            {/* Mobile Menu */}
+            <Suspense fallback={null}>
+              <MobileMenu />
+            </Suspense>
           </div>
         </div>
       </motion.header>
 
       {/* Executive Progress Indicator */}
-      <div className="fixed top-0 left-0 right-0 h-1 bg-slate-900/50 z-50 backdrop-blur-xl">
+      <div 
+        className="fixed top-0 left-0 right-0 h-1 bg-slate-900/50 z-50 backdrop-blur-xl"
+        role="progressbar"
+        aria-label="Page scroll progress"
+        aria-valuenow={0}
+        aria-valuemin={0}
+        aria-valuemax={100}
+      >
         <motion.div
           className="h-full bg-gradient-to-r from-blue-500 via-indigo-500 to-purple-500 shadow-glow-blue"
           style={{ width: progressWidth }}
@@ -228,7 +248,10 @@ function App() {
       {/* Main Executive Content */}
       <main className="relative z-10">
         {/* Hero Section - Massive ORV Title */}
-        <section className="executive-section min-h-[100dvh] flex items-center justify-center relative">
+        <section 
+          className="executive-section min-h-[100dvh] flex items-center justify-center relative"
+          aria-label="Hero section"
+        >
           <div className="absolute inset-0 bg-gradient-to-b from-transparent via-slate-950/20 to-slate-950" />
           <div className="relative z-10 text-center space-y-12 px-6">
             {/* Giant ORV Logo */}
@@ -266,10 +289,18 @@ function App() {
               transition={{ duration: 0.8, delay: 0.8, ease: [0.16, 1, 0.3, 1] }}
               className="flex flex-col sm:flex-row items-center justify-center gap-6"
             >
-              <a href="#projects" className="btn-executive group">
+              <a 
+                href="#projects" 
+                className="btn-executive group"
+                aria-label="View my work and projects"
+              >
                 <span className="relative z-10">{hero.ctaWork}</span>
               </a>
-              <a href="#contact" className="btn-secondary-exec">
+              <a 
+                href="#contact" 
+                className="btn-secondary-exec"
+                aria-label="Get in touch and contact me"
+              >
                 {hero.ctaContact}
               </a>
             </motion.div>
@@ -310,7 +341,9 @@ function App() {
                 ))}
               </div>
             </div>
-            <AboutSection />
+            <Suspense fallback={<div className="premium-card animate-pulse h-64" />}>
+              <AboutSection />
+            </Suspense>
           </div>
         </section>
         {/* Skills Section with Terminal Header */}
@@ -337,7 +370,9 @@ function App() {
                 ))}
               </div>
             </div>
-            <SkillsSection />
+            <Suspense fallback={<div className="premium-card animate-pulse h-64" />}>
+              <SkillsSection />
+            </Suspense>
           </div>
         </section>
         {/* Projects Section with Terminal Header */}
@@ -363,7 +398,9 @@ function App() {
                 ))}
               </div>
             </div>
-            <ProjectsSection />
+            <Suspense fallback={<div className="premium-card animate-pulse h-64" />}>
+              <ProjectsSection />
+            </Suspense>
           </div>
         </section>
         {/* Contact Section with Terminal Header */}
@@ -390,7 +427,9 @@ function App() {
                 ))}
               </div>
             </div>
-            <ContactSection />
+            <Suspense fallback={<div className="premium-card animate-pulse h-64" />}>
+              <ContactSection />
+            </Suspense>
           </div>
         </section>
         {/* Extended Footer Section - Full Height */}
@@ -416,8 +455,12 @@ function App() {
       </main>
 
       {/* Executive Utilities */}
-      <BackgroundMusic />
-    </div>
+      <Suspense fallback={null}>
+        <BackgroundMusic />
+      </Suspense>
+        </div>
+      </ErrorBoundary>
+    </Suspense>
   )
 }
 

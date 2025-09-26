@@ -10,8 +10,19 @@ export default defineConfig({
     assetsDir: 'assets',
     rollupOptions: {
       output: {
-        manualChunks: undefined,
+        manualChunks: {
+          // Vendor chunks for better caching
+          vendor: ['react', 'react-dom'],
+          animations: ['framer-motion', 'gsap'],
+          ui: ['lucide-react', 'lenis'],
+        },
       },
     },
+    // Enable compression
+    minify: 'esbuild',
+  },
+  // Optimize dependencies
+  optimizeDeps: {
+    include: ['react', 'react-dom', 'framer-motion', 'gsap', 'lenis'],
   },
 })
