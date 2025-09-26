@@ -11,8 +11,17 @@ const ProjectsSection = () => {
   const [isModalOpen, setIsModalOpen] = useState(false)
 
   const openModal = (project: Project) => {
-    setSelectedProject(project)
-    setIsModalOpen(true)
+    // Scroll to projects section first
+    const projectsSection = document.getElementById('projects-section')
+    if (projectsSection) {
+      projectsSection.scrollIntoView({ behavior: 'smooth', block: 'start' })
+    }
+    
+    // Small delay to allow scroll to complete
+    setTimeout(() => {
+      setSelectedProject(project)
+      setIsModalOpen(true)
+    }, 300)
   }
 
   const closeModal = () => {
@@ -22,7 +31,7 @@ const ProjectsSection = () => {
 
   return (
     <>
-      <div className="space-y-12">
+      <div id="projects-section" className="space-y-12">
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
