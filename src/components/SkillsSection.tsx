@@ -5,11 +5,12 @@ const SkillsSection = () => {
   return (
     <div className="space-y-12">
       <motion.div
-        initial={{ opacity: 0, y: 30 }}
+        initial={{ opacity: 0, y: 20 }}
         whileInView={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.8 }}
-        viewport={{ once: true }}
+        transition={{ duration: 0.5, ease: "easeOut" }}
+        viewport={{ once: true, margin: "-50px" }}
         className="text-center mb-16"
+        style={{ willChange: 'transform, opacity' }}
       >
         <h2 className="heading-section mb-8">{skills.heading}</h2>
         <p className="subheading-executive mx-auto">
@@ -21,11 +22,12 @@ const SkillsSection = () => {
         {skills.list.map((skill, index) => (
           <motion.div
             key={skill.name}
-            initial={{ opacity: 0, y: 20 }}
+            initial={{ opacity: 0, y: 15 }}
             whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: index * 0.1 }}
-            viewport={{ once: true }}
+            transition={{ duration: 0.4, delay: index * 0.05, ease: "easeOut" }}
+            viewport={{ once: true, margin: "-50px" }}
             className="premium-card"
+            style={{ willChange: 'transform, opacity' }}
           >
             <div className="premium-card-content">
               <div className="flex justify-between items-center mb-4">

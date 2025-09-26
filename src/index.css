@@ -395,6 +395,23 @@
     z-index: 9999 !important;
   }
 
+  /* Prevent flickering and layout shifts */
+  .project-showcase {
+    transform: translateZ(0);
+    backface-visibility: hidden;
+    perspective: 1000px;
+  }
+
+  .premium-card-content {
+    transform: translateZ(0);
+    will-change: auto;
+  }
+
+  /* Smooth transitions for all interactive elements */
+  * {
+    transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
   /* Executive focus states */
   .focus-executive {
     @apply focus:outline-none focus:ring-4 focus:ring-blue-500/20 focus:border-blue-500/50;

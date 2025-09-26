@@ -39,12 +39,17 @@ const ProjectsSection = () => {
           {featuredProjects.map((project, index) => (
             <motion.div
               key={project.id}
-              initial={{ opacity: 0, y: 30 }}
+              initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: index * 0.1 }}
-              viewport={{ once: true }}
+              transition={{ 
+                duration: 0.4, 
+                delay: index * 0.05,
+                ease: "easeOut"
+              }}
+              viewport={{ once: true, margin: "-50px" }}
               className="project-showcase hover-lift-executive group cursor-pointer"
               onClick={() => toggleProjectDetails(project)}
+              style={{ willChange: 'transform, opacity' }}
             >
               <div className="premium-card-content">
                 {/* Project Header - Always Visible */}
@@ -107,8 +112,12 @@ const ProjectsSection = () => {
                     initial={{ opacity: 0, height: 0 }}
                     animate={{ opacity: 1, height: 'auto' }}
                     exit={{ opacity: 0, height: 0 }}
-                    transition={{ duration: 0.3 }}
+                    transition={{ 
+                      duration: 0.3,
+                      ease: "easeInOut"
+                    }}
                     className="mt-6 pt-6 border-t border-slate-700/50 overflow-hidden"
+                    style={{ willChange: 'height, opacity' }}
                   >
                     <div className="space-y-6">
                       {/* Full Description */}
