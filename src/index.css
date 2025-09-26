@@ -376,6 +376,25 @@
     -webkit-backdrop-filter: blur(8px);
   }
 
+  /* Force modal positioning */
+  .modal-overlay {
+    position: fixed !important;
+    top: 0 !important;
+    left: 0 !important;
+    width: 100vw !important;
+    height: 100vh !important;
+    z-index: 10000 !important;
+  }
+
+  .modal-backdrop-overlay {
+    position: fixed !important;
+    top: 0 !important;
+    left: 0 !important;
+    width: 100vw !important;
+    height: 100vh !important;
+    z-index: 9999 !important;
+  }
+
   /* Executive focus states */
   .focus-executive {
     @apply focus:outline-none focus:ring-4 focus:ring-blue-500/20 focus:border-blue-500/50;
