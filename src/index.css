@@ -11,10 +11,16 @@
   html {
     @apply scroll-smooth;
     font-feature-settings: 'cv02', 'cv03', 'cv04', 'cv11';
-  text-rendering: optimizeLegibility;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-}
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    /* Prevent overscroll and bounce effects */
+    overscroll-behavior: none;
+    overscroll-behavior-y: none;
+    /* Ensure full height */
+    height: 100%;
+    overflow-x: hidden;
+  }
 
   body {
     @apply bg-slate-950 text-slate-100 font-sans antialiased;
@@ -24,10 +30,41 @@
       linear-gradient(135deg, #020617 0%, #0f172a 50%, #1e293b 100%);
     background-attachment: fixed;
     min-height: 100vh;
+    height: 100vh; /* Ensure full viewport height */
     overflow-x: hidden;
+    /* Prevent overscroll and bounce effects */
+    overscroll-behavior: none;
+    overscroll-behavior-y: none;
     /* Performance optimizations */
     will-change: auto;
     transform: translateZ(0);
+  }
+
+  #root {
+    /* Ensure root element covers full height */
+    min-height: 100vh;
+    height: 100vh;
+    /* Prevent overscroll */
+    overscroll-behavior: none;
+    overscroll-behavior-y: none;
+  }
+
+  /* Mobile-specific fixes for overscroll */
+  @media (max-width: 768px) {
+    html, body, #root {
+      /* Prevent bounce effect on iOS */
+      -webkit-overflow-scrolling: touch;
+      overscroll-behavior: none;
+      overscroll-behavior-y: none;
+      /* Ensure no white space */
+      position: relative;
+      overflow-x: hidden;
+    }
+    
+    /* Prevent pull-to-refresh */
+    body {
+      overscroll-behavior-y: contain;
+    }
   }
 
   /* Ultra-premium scrollbar */

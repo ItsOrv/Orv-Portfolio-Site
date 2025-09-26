@@ -46,6 +46,42 @@ function App() {
     const isMobile = /Android|iPhone|iPad|iPod|Opera Mini|IEMobile|WPDesktop/i.test(navigator.userAgent)
     const isLowEnd = navigator.hardwareConcurrency && navigator.hardwareConcurrency < 4
     const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches
+
+    // Prevent overscroll and bounce effects on mobile
+    if (isMobile) {
+      // Prevent pull-to-refresh
+      document.body.style.overscrollBehaviorY = 'contain'
+      
+      // Prevent overscroll bounce
+      const preventOverscroll = (e: TouchEvent) => {
+        const target = e.target as Element
+        const scrollableParent = target.closest('[data-scrollable]') || document.body
+        
+        if (scrollableParent === document.body) {
+          const scrollTop = document.documentElement.scrollTop || document.body.scrollTop
+          const scrollHeight = document.documentElement.scrollHeight || document.body.scrollHeight
+          const clientHeight = document.documentElement.clientHeight || window.innerHeight
+          
+          // Prevent overscroll at top
+          if (scrollTop <= 0 && e.touches[0].clientY > e.touches[0].clientY) {
+            e.preventDefault()
+          }
+          
+          // Prevent overscroll at bottom
+          if (scrollTop + clientHeight >= scrollHeight && e.touches[0].clientY < e.touches[0].clientY) {
+            e.preventDefault()
+          }
+        }
+      }
+      
+      document.addEventListener('touchstart', preventOverscroll, { passive: false })
+      document.addEventListener('touchmove', preventOverscroll, { passive: false })
+      
+      return () => {
+        document.removeEventListener('touchstart', preventOverscroll)
+        document.removeEventListener('touchmove', preventOverscroll)
+      }
+    }
     // Initialize optimized smooth scroll
     const lenis = new Lenis({
       duration: 1.2, // Reduced duration for better performance
