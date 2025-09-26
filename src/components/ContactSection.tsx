@@ -1,12 +1,12 @@
 import { motion } from 'framer-motion'
-import { Mail, Github, Send, ExternalLink } from 'lucide-react'
+import { Mail, Github, Send, ExternalLink, Users } from 'lucide-react'
 
 const ContactSection = () => {
   const contactInfo = [
     {
       type: 'email',
-      label: 'contact@orv.dev',
-      href: 'mailto:contact@orv.dev',
+      label: 'poriya.saw@gmail.com',
+      href: 'mailto:poriya.saw@gmail.com',
       icon: 'blue',
       description: 'Send me an email'
     },
@@ -23,6 +23,13 @@ const ContactSection = () => {
       href: 'https://t.me/Pouria_Orv',
       icon: 'indigo',
       description: 'Chat on Telegram'
+    },
+    {
+      type: 'telegramChannel',
+      label: 't.me/Orv_Codes',
+      href: 'https://t.me/Orv_Codes',
+      icon: 'green',
+      description: 'Join my coding channel'
     }
   ]
 
@@ -34,6 +41,8 @@ const ContactSection = () => {
         return <Github className="w-5 h-5" />
       case 'telegram':
         return <Send className="w-5 h-5" />
+      case 'telegramChannel':
+        return <Users className="w-5 h-5" />
       default:
         return <ExternalLink className="w-5 h-5" />
     }
@@ -83,6 +92,7 @@ const ContactSection = () => {
                                      ${item.icon === 'blue' ? 'bg-blue-500/20 text-blue-400 group-hover:bg-blue-500/30' : ''}
                                      ${item.icon === 'purple' ? 'bg-purple-500/20 text-purple-400 group-hover:bg-purple-500/30' : ''}
                                      ${item.icon === 'indigo' ? 'bg-indigo-500/20 text-indigo-400 group-hover:bg-indigo-500/30' : ''}
+                                     ${item.icon === 'green' ? 'bg-green-500/20 text-green-400 group-hover:bg-green-500/30' : ''}
                                      transition-colors duration-300`}>
                         {getIcon(item.type)}
                       </div>

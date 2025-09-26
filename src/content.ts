@@ -10,10 +10,11 @@ const content = {
       focus: 'Specializing in Django, React, and the modern JavaScript/TypeScript ecosystem. Exploring innovative solutions and expanding technical expertise in ML, automation, and web development.',
     },
     contact: {
-      email: 'contact@orv.dev',
+      email: 'poriya.saw@gmail.com',
       linkedin: 'https://linkedin.com/in/ItsOrv',
       github: 'https://github.com/ItsOrv',
       telegram: 'https://t.me/Pouria_Orv',
+      telegramChannel: 'https://t.me/Orv_Codes',
     },
   },
   hero: {
