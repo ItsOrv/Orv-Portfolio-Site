@@ -400,11 +400,30 @@
     transform: translateZ(0);
     backface-visibility: hidden;
     perspective: 1000px;
+    contain: layout style paint;
   }
 
   .premium-card-content {
     transform: translateZ(0);
     will-change: auto;
+    contain: layout style paint;
+  }
+
+  /* Force hardware acceleration for all animated elements */
+  .premium-card {
+    transform: translateZ(0);
+    backface-visibility: hidden;
+    contain: layout style paint;
+  }
+
+  /* Disable transitions during initial load */
+  .premium-card * {
+    transition: none !important;
+  }
+
+  /* Re-enable transitions after load */
+  .premium-card.loaded * {
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
   }
 
   /* Smooth transitions for all interactive elements */

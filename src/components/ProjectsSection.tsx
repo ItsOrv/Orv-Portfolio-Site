@@ -1,4 +1,4 @@
-import { motion, AnimatePresence } from 'framer-motion'
+import { motion } from 'framer-motion'
 import { useState } from 'react'
 import { projects } from '../content'
 import { getFeaturedProjects } from '../data/projects'
@@ -36,20 +36,11 @@ const ProjectsSection = () => {
         </motion.div>
 
         <div className="space-y-8">
-          {featuredProjects.map((project, index) => (
-            <motion.div
+          {featuredProjects.map((project) => (
+            <div
               key={project.id}
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ 
-                duration: 0.4, 
-                delay: index * 0.05,
-                ease: "easeOut"
-              }}
-              viewport={{ once: true, margin: "-50px" }}
               className="project-showcase hover-lift-executive group cursor-pointer"
               onClick={() => toggleProjectDetails(project)}
-              style={{ willChange: 'transform, opacity' }}
             >
               <div className="premium-card-content">
                 {/* Project Header - Always Visible */}
@@ -106,19 +97,8 @@ const ProjectsSection = () => {
                 </div>
 
                 {/* Expanded Details - Only show when selected */}
-                <AnimatePresence>
-                  {selectedProject?.id === project.id && (
-                    <motion.div
-                    initial={{ opacity: 0, height: 0 }}
-                    animate={{ opacity: 1, height: 'auto' }}
-                    exit={{ opacity: 0, height: 0 }}
-                    transition={{ 
-                      duration: 0.3,
-                      ease: "easeInOut"
-                    }}
-                    className="mt-6 pt-6 border-t border-slate-700/50 overflow-hidden"
-                    style={{ willChange: 'height, opacity' }}
-                  >
+                {selectedProject?.id === project.id && (
+                  <div className="mt-6 pt-6 border-t border-slate-700/50">
                     <div className="space-y-6">
                       {/* Full Description */}
                       <div>
@@ -224,11 +204,10 @@ const ProjectsSection = () => {
                         </div>
                       )}
                     </div>
-                    </motion.div>
-                  )}
-                </AnimatePresence>
+                  </div>
+                )}
               </div>
-            </motion.div>
+            </div>
           ))}
         </div>
       </div>

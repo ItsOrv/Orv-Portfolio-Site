@@ -4,30 +4,18 @@ import { skills } from '../content'
 const SkillsSection = () => {
   return (
     <div className="space-y-12">
-      <motion.div
-        initial={{ opacity: 0, y: 20 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.5, ease: "easeOut" }}
-        viewport={{ once: true, margin: "-50px" }}
-        className="text-center mb-16"
-        style={{ willChange: 'transform, opacity' }}
-      >
+      <div className="text-center mb-16">
         <h2 className="heading-section mb-8">{skills.heading}</h2>
         <p className="subheading-executive mx-auto">
           {skills.subheading}
         </p>
-      </motion.div>
+      </div>
 
       <div className="grid md:grid-cols-2 gap-8">
         {skills.list.map((skill, index) => (
-          <motion.div
+          <div
             key={skill.name}
-            initial={{ opacity: 0, y: 15 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.4, delay: index * 0.05, ease: "easeOut" }}
-            viewport={{ once: true, margin: "-50px" }}
             className="premium-card"
-            style={{ willChange: 'transform, opacity' }}
           >
             <div className="premium-card-content">
               <div className="flex justify-between items-center mb-4">
@@ -44,7 +32,7 @@ const SkillsSection = () => {
                 />
               </div>
             </div>
-          </motion.div>
+          </div>
         ))}
       </div>
     </div>
