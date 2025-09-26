@@ -23,7 +23,7 @@ const content = {
     description: 'Building impactful projects in Telegram Bot, cybersecurity, AI, and automation. Passionate about open source and innovative solutions.',
     ctaWork: 'View My Work',
     ctaContact: 'Get In Touch',
-    status: 'Open for collaboration and freelance',
+    status: 'Open for collaboration :)',
   },
   about: {
     terminalName: 'about-terminal',
