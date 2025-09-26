@@ -43,14 +43,12 @@ const ProjectsSection = () => {
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: index * 0.1 }}
               viewport={{ once: true }}
-              className="project-showcase hover-lift-executive group"
+              className="project-showcase hover-lift-executive group cursor-pointer"
+              onClick={() => toggleProjectDetails(project)}
             >
               <div className="premium-card-content">
                 {/* Project Header - Always Visible */}
-                <div 
-                  className="flex justify-between items-start mb-4 cursor-pointer"
-                  onClick={() => toggleProjectDetails(project)}
-                >
+                <div className="flex justify-between items-start mb-4">
                   <h3 className="text-xl font-bold text-slate-200 group-hover:text-white transition-colors">
                     {project.title}
                   </h3>
