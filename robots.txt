@@ -1,4 +1,0 @@
-User-agent: *
-Allow: /
-
-Sitemap: https://itsorv.github.io/Orv-Site/sitemap.xml
