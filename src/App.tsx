@@ -34,8 +34,8 @@ function App() {
   const meshScale3 = useTransform(scrollYProgress, [0, 1], [1, 1.2])
   const gridScale = useTransform(scrollYProgress, [0, 1], [1, 1.1])
 
-  // Particle scroll animations - create transforms for each particle
-  const particleTransforms = Array.from({ length: 20 }, (_, i) => ({
+  // Particle scroll animations - create transforms for each particle (reduced for performance)
+  const particleTransforms = Array.from({ length: 12 }, (_, i) => ({
     y: useTransform(scrollYProgress, [0, 1], [0, -200 - i * 10]),
     x: useTransform(scrollYProgress, [0, 1], [0, (i % 2 === 0 ? 1 : -1) * (50 + i * 5)]),
     opacity: useTransform(scrollYProgress, [0, 0.5, 1], [0.3, 0.8, 0.2])
@@ -203,13 +203,13 @@ function App() {
         role="banner"
         aria-label="Main navigation"
       >
-        <div className="container mx-auto px-6 py-4">
+        <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-4">
           <div className="flex items-center justify-between">
             <div className="flex items-center space-x-2">
               <div className="w-2 h-2 bg-emerald-400 rounded-full animate-pulse" aria-hidden="true" />
               <span className="font-mono text-sm text-slate-400">Orv.dev</span>
             </div>
-            <nav className="hidden md:flex items-center space-x-8" role="navigation" aria-label="Main menu">
+            <nav className="hidden lg:flex items-center space-x-8" role="navigation" aria-label="Main menu">
               {['About', 'Skills', 'Projects', 'Contact'].map((item) => (
                 <a
                   key={item}
@@ -253,7 +253,7 @@ function App() {
           aria-label="Hero section"
         >
           <div className="absolute inset-0 bg-gradient-to-b from-transparent via-slate-950/20 to-slate-950" />
-          <div className="relative z-10 text-center space-y-12 px-6">
+          <div className="relative z-10 text-center space-y-12 px-4 sm:px-6 lg:px-8">
             {/* Giant ORV Logo */}
             <motion.div
               initial={{ opacity: 0, scale: 0.8 }}
@@ -261,7 +261,7 @@ function App() {
               transition={{ duration: 1.5, ease: [0.16, 1, 0.3, 1] }}
               className="mb-16"
             >
-              <h1 className="text-8xl md:text-9xl lg:text-[12rem] xl:text-[14rem] font-black tracking-tighter leading-none
+              <h1 className="text-6xl sm:text-7xl md:text-8xl lg:text-9xl xl:text-[12rem] 2xl:text-[14rem] font-black tracking-tighter leading-none
                            bg-gradient-to-br from-slate-100 via-blue-200 to-indigo-300 bg-clip-text text-transparent
                            drop-shadow-2xl">
                 {hero.title}
@@ -291,14 +291,14 @@ function App() {
             >
               <a 
                 href="#projects" 
-                className="btn-executive group"
+                className="btn-executive group min-h-[48px] min-w-[140px]"
                 aria-label="View my work and projects"
               >
                 <span className="relative z-10">{hero.ctaWork}</span>
               </a>
               <a 
                 href="#contact" 
-                className="btn-secondary-exec"
+                className="btn-secondary-exec min-h-[48px] min-w-[140px]"
                 aria-label="Get in touch and contact me"
               >
                 {hero.ctaContact}
@@ -319,8 +319,8 @@ function App() {
           </div>
         </section>
         {/* About Section with Terminal Header */}
-        <section id="about" className="executive-section min-h-[100dvh] py-32">
-          <div className="container mx-auto px-6 max-w-7xl">
+        <section id="about" className="executive-section min-h-[100dvh] py-16 md:py-24 lg:py-32">
+          <div className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-7xl">
             {/* Terminal Header with macOS buttons */}
             <div className="executive-terminal mb-16 p-0 bg-transparent border-none shadow-none">
               <div className="terminal-bar flex items-center justify-between px-4 py-2 bg-slate-800/80 border-b border-slate-700/50 rounded-t-2xl">
@@ -347,7 +347,7 @@ function App() {
           </div>
         </section>
         {/* Skills Section with Terminal Header */}
-        <section id="skills" className="executive-section min-h-[100dvh] py-32 relative">
+        <section id="skills" className="executive-section min-h-[100dvh] py-16 md:py-24 lg:py-32 relative">
           <div className="parallax-executive absolute inset-0 bg-gradient-to-b from-slate-900/20 to-transparent" />
           <div className="container mx-auto px-6 max-w-7xl relative z-10">
             {/* Terminal Header with macOS buttons */}
@@ -376,8 +376,8 @@ function App() {
           </div>
         </section>
         {/* Projects Section with Terminal Header */}
-        <section id="projects" className="executive-section min-h-[100dvh] py-32">
-          <div className="container mx-auto px-6 max-w-7xl">
+        <section id="projects" className="executive-section min-h-[100dvh] py-16 md:py-24 lg:py-32">
+          <div className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-7xl">
             {/* Terminal Header with macOS buttons */}
             <div className="executive-terminal mb-16 p-0 bg-transparent border-none shadow-none">
               <div className="terminal-bar flex items-center justify-between px-4 py-2 bg-slate-800/80 border-b border-slate-700/50 rounded-t-2xl">
@@ -404,7 +404,7 @@ function App() {
           </div>
         </section>
         {/* Contact Section with Terminal Header */}
-        <section id="contact" className="executive-section min-h-[100dvh] py-32 relative">
+        <section id="contact" className="executive-section min-h-[100dvh] py-16 md:py-24 lg:py-32 relative">
           <div className="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/80 to-transparent" />
           <div className="container mx-auto px-6 max-w-7xl relative z-10">
             {/* Terminal Header with macOS buttons */}
@@ -433,8 +433,8 @@ function App() {
           </div>
         </section>
         {/* Extended Footer Section - Full Height */}
-        <section className="executive-section min-h-[100dvh] py-32 bg-slate-950 border-t border-slate-800/50 flex items-center justify-center">
-          <div className="container mx-auto px-6 text-center">
+        <section className="executive-section min-h-[100dvh] py-16 md:py-24 lg:py-32 bg-slate-950 border-t border-slate-800/50 flex items-center justify-center">
+          <div className="container mx-auto px-4 sm:px-6 lg:px-8 text-center">
             <div className="space-y-8">
               <div className="flex items-center justify-center gap-2">
                 <div className="w-3 h-3 bg-emerald-400 rounded-full animate-pulse" />

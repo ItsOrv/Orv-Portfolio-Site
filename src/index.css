@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap&text=ORVFull-StackDeveloperAboutSkillsProjectsContact');
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -53,11 +53,11 @@
 
   /* Premium text selection */
   ::selection {
-    @apply bg-blue-500/30 text-blue-100;
+    @apply bg-blue-500/40 text-white;
   }
 
   ::-moz-selection {
-    @apply bg-blue-500/30 text-blue-100;
+    @apply bg-blue-500/40 text-white;
   }
 }
 

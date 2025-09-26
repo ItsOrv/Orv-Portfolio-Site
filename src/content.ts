@@ -10,8 +10,8 @@ const content = {
       focus: 'Specializing in Django, React, and the modern JavaScript/TypeScript ecosystem. Exploring innovative solutions and expanding technical expertise in ML, automation, and web development.',
     },
     contact: {
-      email: 'idk',
-      linkedin: '/in/ItsOrv',
+      email: 'contact@orv.dev',
+      linkedin: 'https://linkedin.com/in/ItsOrv',
       github: 'https://github.com/ItsOrv',
       telegram: 'https://t.me/Pouria_Orv',
     },
