@@ -149,7 +149,7 @@ function App() {
   }, [])
 
   return (
-    <Router>
+    <Router basename="/Orv-Site">
       <Suspense fallback={<div className="min-h-screen bg-slate-950 flex items-center justify-center"><div className="premium-card animate-pulse h-64 w-64" /></div>}>
         <ErrorBoundary>
           <Routes>
