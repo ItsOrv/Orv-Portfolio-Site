@@ -20,26 +20,10 @@ function App() {
   const containerRef = useRef<HTMLDivElement>(null)
   const { scrollYProgress } = useScroll()
   
-  const backgroundY = useTransform(scrollYProgress, [0, 1], ['0%', '50%'])
   const progressWidth = useTransform(scrollYProgress, [0, 1], ['0%', '100%'])
   const headerOpacity = useTransform(scrollYProgress, [0, 0.1], [0, 1])
-  const noiseOpacity = useTransform(scrollYProgress, [0, 1], [0.2, 0.1]) // Reduced opacity
   
-  // Simplified background animations for better performance
-  const gradientRotation = useTransform(scrollYProgress, [0, 1], [0, 180]) // Reduced rotation
-  const meshMove1 = useTransform(scrollYProgress, [0, 1], ['0%', '50%']) // Reduced movement
-  const meshMove2 = useTransform(scrollYProgress, [0, 1], ['50%', '0%']) // Reduced movement
-  const meshScale1 = useTransform(scrollYProgress, [0, 1], [1, 1.2]) // Reduced scale
-  const meshScale2 = useTransform(scrollYProgress, [0, 1], [1, 0.9]) // Reduced scale
-  const meshScale3 = useTransform(scrollYProgress, [0, 1], [1, 1.1]) // Reduced scale
-  const gridScale = useTransform(scrollYProgress, [0, 1], [1, 1.05]) // Reduced scale
-
-  // Particle scroll animations - create transforms for each particle (further reduced for performance)
-  const particleTransforms = Array.from({ length: 6 }, (_, i) => ({
-    y: useTransform(scrollYProgress, [0, 1], [0, -100 - i * 15]),
-    x: useTransform(scrollYProgress, [0, 1], [0, (i % 2 === 0 ? 1 : -1) * (30 + i * 8)]),
-    opacity: useTransform(scrollYProgress, [0, 0.5, 1], [0.2, 0.6, 0.1])
-  }))
+  // Removed animated background elements for cleaner experience
 
   useEffect(() => {
     // Detect mobile device and performance mode
@@ -166,79 +150,8 @@ function App() {
     <Suspense fallback={<div className="min-h-screen bg-slate-950 flex items-center justify-center"><div className="premium-card animate-pulse h-64 w-64" /></div>}>
       <ErrorBoundary>
         <div ref={containerRef} className="relative overflow-hidden">
-      {/* Enhanced Executive Background System */}
-      <div className="fixed inset-0 overflow-hidden pointer-events-none">
-        {/* Advanced animated gradient mesh */}
-        <div className="absolute inset-0">
-          <motion.div 
-            style={{ 
-              x: meshMove1, 
-              y: meshMove2,
-              scale: meshScale1
-            }}
-            className="absolute top-0 left-1/4 w-96 h-96 bg-blue-500/10 rounded-full blur-3xl"
-          />
-          <motion.div 
-            style={{ 
-              x: meshMove2, 
-              y: meshMove1, 
-              rotate: gradientRotation,
-              scale: meshScale2
-            }}
-            className="absolute top-1/3 right-1/4 w-80 h-80 bg-indigo-500/10 rounded-full blur-3xl"
-          />
-          <motion.div 
-            style={{ 
-              x: meshMove1, 
-              y: meshMove2,
-              scale: meshScale3
-            }}
-            className="absolute bottom-1/4 left-1/3 w-72 h-72 bg-purple-500/10 rounded-full blur-3xl"
-          />
-        </div>
-
-        {/* Enhanced executive grid pattern with parallax */}
-        <motion.div 
-          style={{ 
-            y: backgroundY, 
-            rotate: gradientRotation,
-            scale: gridScale
-          }}
-          className="absolute inset-0 grid-executive opacity-20"
-        />
-        
-        {/* Animated noise texture overlay */}
-        <motion.div 
-          style={{ opacity: noiseOpacity }}
-          className="absolute inset-0 noise-texture"
-        />
-
-        {/* Premium floating particles with smooth scroll animation */}
-        <div className="absolute inset-0">
-          {particleTransforms.map((transform, i) => (
-            <motion.div
-              key={i}
-              className="absolute w-2 h-2 bg-blue-400/30 rounded-full"
-              style={{
-                left: `${(i * 5.26) % 100}%`,
-                top: `${(i * 7.37) % 100}%`,
-                x: transform.x,
-                y: transform.y,
-                opacity: transform.opacity,
-              }}
-              animate={{
-                scale: [1, 1.2, 1],
-              }}
-              transition={{
-                duration: 4 + (i % 3),
-                repeat: Infinity,
-                ease: "easeInOut",
-                delay: i * 0.2,
-              }}
-            />
-          ))}
-        </div>
-      </div>
+      {/* Clean static background */}
+      <div className="fixed inset-0 bg-slate-950" />
 
       {/* Executive Navigation Header */}
       <motion.header 
