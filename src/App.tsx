@@ -23,37 +23,39 @@ function App() {
   const backgroundY = useTransform(scrollYProgress, [0, 1], ['0%', '50%'])
   const progressWidth = useTransform(scrollYProgress, [0, 1], ['0%', '100%'])
   const headerOpacity = useTransform(scrollYProgress, [0, 0.1], [0, 1])
-  const noiseOpacity = useTransform(scrollYProgress, [0, 1], [0.4, 0.2])
+  const noiseOpacity = useTransform(scrollYProgress, [0, 1], [0.2, 0.1]) // Reduced opacity
   
-  // Advanced background animations
-  const gradientRotation = useTransform(scrollYProgress, [0, 1], [0, 360])
-  const meshMove1 = useTransform(scrollYProgress, [0, 1], ['0%', '100%'])
-  const meshMove2 = useTransform(scrollYProgress, [0, 1], ['100%', '0%'])
-  const meshScale1 = useTransform(scrollYProgress, [0, 1], [1, 1.5])
-  const meshScale2 = useTransform(scrollYProgress, [0, 1], [1, 0.8])
-  const meshScale3 = useTransform(scrollYProgress, [0, 1], [1, 1.2])
-  const gridScale = useTransform(scrollYProgress, [0, 1], [1, 1.1])
+  // Simplified background animations for better performance
+  const gradientRotation = useTransform(scrollYProgress, [0, 1], [0, 180]) // Reduced rotation
+  const meshMove1 = useTransform(scrollYProgress, [0, 1], ['0%', '50%']) // Reduced movement
+  const meshMove2 = useTransform(scrollYProgress, [0, 1], ['50%', '0%']) // Reduced movement
+  const meshScale1 = useTransform(scrollYProgress, [0, 1], [1, 1.2]) // Reduced scale
+  const meshScale2 = useTransform(scrollYProgress, [0, 1], [1, 0.9]) // Reduced scale
+  const meshScale3 = useTransform(scrollYProgress, [0, 1], [1, 1.1]) // Reduced scale
+  const gridScale = useTransform(scrollYProgress, [0, 1], [1, 1.05]) // Reduced scale
 
-  // Particle scroll animations - create transforms for each particle (reduced for performance)
-  const particleTransforms = Array.from({ length: 12 }, (_, i) => ({
-    y: useTransform(scrollYProgress, [0, 1], [0, -200 - i * 10]),
-    x: useTransform(scrollYProgress, [0, 1], [0, (i % 2 === 0 ? 1 : -1) * (50 + i * 5)]),
-    opacity: useTransform(scrollYProgress, [0, 0.5, 1], [0.3, 0.8, 0.2])
+  // Particle scroll animations - create transforms for each particle (further reduced for performance)
+  const particleTransforms = Array.from({ length: 6 }, (_, i) => ({
+    y: useTransform(scrollYProgress, [0, 1], [0, -100 - i * 15]),
+    x: useTransform(scrollYProgress, [0, 1], [0, (i % 2 === 0 ? 1 : -1) * (30 + i * 8)]),
+    opacity: useTransform(scrollYProgress, [0, 0.5, 1], [0.2, 0.6, 0.1])
   }))
 
   useEffect(() => {
-    // Detect mobile device
+    // Detect mobile device and performance mode
     const isMobile = /Android|iPhone|iPad|iPod|Opera Mini|IEMobile|WPDesktop/i.test(navigator.userAgent)
-    // Initialize premium smooth scroll
+    const isLowEnd = navigator.hardwareConcurrency && navigator.hardwareConcurrency < 4
+    const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches
+    // Initialize optimized smooth scroll
     const lenis = new Lenis({
-      duration: 1.6,
-      easing: (t: number) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+      duration: 1.2, // Reduced duration for better performance
+      easing: (t: number) => Math.min(1, 1.001 - Math.pow(2, -8 * t)), // Simplified easing
       orientation: 'vertical',
       gestureOrientation: 'vertical',
-      smoothWheel: true,
-      wheelMultiplier: 1,
-      touchMultiplier: 2,
-      ...(isMobile && { smooth: false }), // Fully disable Lenis smooth scroll on mobile
+      smoothWheel: !isMobile && !isLowEnd && !prefersReducedMotion, // Disable on mobile/low-end/reduced motion
+      wheelMultiplier: isLowEnd ? 0.6 : 0.8, // Further reduced for low-end devices
+      touchMultiplier: isLowEnd ? 1.2 : 1.5, // Further reduced for low-end devices
+      ...((isMobile || isLowEnd || prefersReducedMotion) && { smooth: false }), // Disable smooth scroll
     })
 
     function raf(time: number) {
@@ -63,15 +65,21 @@ function App() {
 
     requestAnimationFrame(raf)
 
-    // Fixed GSAP animations - no jumping
+    // Optimized GSAP animations for better performance
     const sections = gsap.utils.toArray('.executive-section')
     
     sections.forEach((section, index: number) => {
+      // Skip animations on low-end devices or reduced motion preference
+      if (isLowEnd || prefersReducedMotion) {
+        gsap.set(section as Element, { opacity: 1, y: 0, scale: 1 })
+        return
+      }
+
       const tl = gsap.timeline({
         scrollTrigger: {
           trigger: section as Element,
-          start: 'top 90%',
-          end: 'bottom 10%',
+          start: 'top 85%', // Earlier trigger for smoother experience
+          end: 'bottom 15%',
           toggleActions: 'play none none reverse',
           once: false, // Allow re-triggering
         }
@@ -80,17 +88,17 @@ function App() {
       // Smooth entrance animation without jumping
       gsap.set(section as Element, { 
         opacity: 0, 
-        y: 50,
-        scale: 0.98,
+        y: 30, // Reduced movement
+        scale: 0.99, // Reduced scale
       })
 
       tl.to(section as Element, { 
         opacity: 1, 
         y: 0, 
         scale: 1,
-        duration: 1,
+        duration: 0.6, // Further reduced duration
         ease: 'power2.out',
-        delay: index * 0.1 // Stagger effect
+        delay: index * 0.03 // Further reduced stagger delay
       })
     })
 
@@ -105,7 +113,7 @@ function App() {
           if (target) {
             lenis.scrollTo(target, {
               offset: -100, // Account for header
-              duration: 2,
+              duration: 1.5, // Reduced duration
             })
           }
         }

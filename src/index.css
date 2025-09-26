@@ -19,13 +19,15 @@
   body {
     @apply bg-slate-950 text-slate-100 font-sans antialiased;
     background: 
-      radial-gradient(circle at 20% 80%, rgba(99, 102, 241, 0.15) 0%, transparent 50%),
-      radial-gradient(circle at 80% 20%, rgba(168, 85, 247, 0.15) 0%, transparent 50%),
-      radial-gradient(circle at 40% 40%, rgba(59, 130, 246, 0.1) 0%, transparent 50%),
+      radial-gradient(circle at 20% 80%, rgba(99, 102, 241, 0.1) 0%, transparent 50%),
+      radial-gradient(circle at 80% 20%, rgba(168, 85, 247, 0.1) 0%, transparent 50%),
       linear-gradient(135deg, #020617 0%, #0f172a 50%, #1e293b 100%);
     background-attachment: fixed;
     min-height: 100vh;
     overflow-x: hidden;
+    /* Performance optimizations */
+    will-change: auto;
+    transform: translateZ(0);
   }
 
   /* Ultra-premium scrollbar */
@@ -65,8 +67,11 @@
   /* Ultra-premium card system */
   .premium-card {
     @apply relative bg-slate-900/40 backdrop-blur-xl border border-slate-800/50 rounded-2xl p-8
-           shadow-xl hover:shadow-2xl transition-all duration-500 ease-out
+           shadow-xl hover:shadow-2xl transition-all duration-300 ease-out
            hover:bg-slate-900/60 hover:border-slate-700/50 overflow-hidden;
+    /* Performance optimizations */
+    will-change: transform, box-shadow;
+    transform: translateZ(0);
   }
 
   .premium-card::before {
@@ -92,6 +97,9 @@
            text-white rounded-xl shadow-xl hover:shadow-2xl
            transform hover:scale-[1.02] active:scale-[0.98] transition-all duration-200
            focus:outline-none focus:ring-4 focus:ring-blue-500/20 overflow-hidden;
+    /* Performance optimizations */
+    will-change: transform, box-shadow;
+    transform: translateZ(0);
   }
 
   .btn-executive::before {
