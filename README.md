@@ -2,26 +2,6 @@
 
 A modern, performance-optimized portfolio website built with React and TypeScript. Features a clean terminal-inspired design with smooth animations and a fully responsive layout.
 
-## Screenshots
-
-### Hero Section
-![Hero Section](./docs/screenshots/hero.png)
-
-### About Section
-![About Section](./docs/screenshots/about.png)
-
-### Skills Section
-![Skills Section](./docs/screenshots/skills.png)
-
-### Projects Section
-![Projects Section](./docs/screenshots/projects.png)
-
-### Contact Section
-![Contact Section](./docs/screenshots/contact.png)
-
-### Mobile View
-![Mobile View](./docs/screenshots/mobile.png)
-
 ## Overview
 
 This portfolio showcases professional work, skills, and projects with an emphasis on performance and user experience. Built with modern web technologies and best practices.
