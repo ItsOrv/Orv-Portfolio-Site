@@ -6,6 +6,8 @@ A modern, performance-optimized portfolio website built with React and TypeScrip
 
 This portfolio showcases professional work, skills, and projects with an emphasis on performance and user experience. Built with modern web technologies and best practices.
 
+**Note:** This project is currently under active development and may contain incomplete features or known issues. See [TODO.md](./TODO.md) for details on remaining work.
+
 ## Tech Stack
 
 - **Framework:** React 19 with TypeScript
@@ -152,6 +154,15 @@ Tests are written using Vitest and React Testing Library. Run tests with:
 ```bash
 npm test
 ```
+
+## Documentation
+
+Additional documentation is available:
+
+- [CONTRIBUTING.md](./CONTRIBUTING.md) - Contribution guidelines
+- [DEPLOYMENT.md](./DEPLOYMENT.md) - Deployment instructions
+- [PERFORMANCE.md](./PERFORMANCE.md) - Performance optimization guide
+- [TODO.md](./TODO.md) - Incomplete features and known issues
 
 ## License
 
