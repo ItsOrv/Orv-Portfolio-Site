@@ -1,5 +1,6 @@
-import { describe, it, expect, vi, beforeEach } from 'vitest'
 import { render, screen } from '@testing-library/react'
+import React from 'react'
+import { beforeEach, describe, expect, it, vi } from 'vitest'
 import App from '../App'
 
 // Mock GSAP
@@ -35,8 +36,8 @@ vi.mock('lenis', () => ({
 // Mock framer-motion
 vi.mock('framer-motion', () => ({
   motion: {
-    div: ({ children, ...props }: any) => <div {...props}>{children}</div>,
-    header: ({ children, ...props }: any) => <header {...props}>{children}</header>,
+    div: ({ children, ...props }: React.HTMLAttributes<HTMLDivElement>) => React.createElement('div', props, children),
+    header: ({ children, ...props }: React.HTMLAttributes<HTMLElement>) => React.createElement('header', props, children),
   },
   useScroll: () => ({ scrollYProgress: { get: () => 0 } }),
   useTransform: () => ({ get: () => 0 }),
