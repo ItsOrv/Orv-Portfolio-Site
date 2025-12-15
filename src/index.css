@@ -170,6 +170,24 @@
            transition-all duration-200 focus:outline-none focus:ring-4 focus:ring-slate-500/20;
   }
 
+  .btn-executive-sm {
+    @apply relative inline-flex items-center justify-center px-4 py-2 font-medium text-xs
+           bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-500 hover:to-indigo-500
+           text-white rounded-lg shadow-lg hover:shadow-xl
+           transform hover:scale-[1.02] active:scale-[0.98] transition-all duration-200
+           focus:outline-none focus:ring-2 focus:ring-blue-500/20 overflow-hidden;
+    /* Performance optimizations */
+    will-change: transform, box-shadow;
+    transform: translateZ(0);
+  }
+
+  .btn-executive-sm::before {
+    content: '';
+    @apply absolute inset-0 bg-gradient-to-r from-white/20 to-transparent 
+           transform -skew-x-12 -translate-x-full group-hover:translate-x-full
+           transition-transform duration-500 ease-out;
+  }
+
   /* Premium terminal styling */
   .executive-terminal {
     @apply premium-card font-mono text-sm relative overflow-hidden;
@@ -414,16 +432,6 @@
     transform: translateZ(0);
     backface-visibility: hidden;
     contain: layout style paint;
-  }
-
-  /* Disable transitions during initial load */
-  .premium-card * {
-    transition: none !important;
-  }
-
-  /* Re-enable transitions after load */
-  .premium-card.loaded * {
-    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
   }
 
   /* Smooth transitions for all interactive elements */

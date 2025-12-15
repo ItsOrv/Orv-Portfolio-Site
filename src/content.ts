@@ -1,5 +1,3 @@
-// src/content.ts
-
 const content = {
   profile: {
     name: 'Orv',
@@ -67,87 +65,11 @@ const content = {
     ],
     heading: 'Featured Projects',
     subheading: 'A collection of my latest work and experiments',
-    list: [
-      // --- Real, professional projects ---
-      {
-        title: 'Telegram Panel',
-        description: 'Comprehensive tool to manage multiple Telegram accounts, monitor groups/channels for keywords, and automatically forward messages to designated channels.',
-        tech: ['Python', 'Telethon', 'Telegram API', 'Automation'],
-        status: 'Live',
-      },
-      {
-        title: 'Telegram Chain Store',
-        description: 'Versatile Telegram bot designed for seamless e-commerce experiences. Handle transactions directly through Telegram.',
-        tech: ['Python', 'Telegram Bot', 'E-commerce', 'Payment Integration'],
-        status: 'Live',
-      },
-      {
-        title: 'AI PDF Translate',
-        description: 'AI-powered PDF translation tool using advanced machine learning techniques.',
-        tech: ['Python', 'AI/ML', 'PDF Processing', 'Translation'],
-        status: 'Live',
-      },
-      {
-        title: 'Orv Telegram Proxy',
-        description: 'Telegram proxy grabber script for enhanced connectivity and security.',
-        tech: ['Python', 'Proxy Management', 'Telegram', 'Networking'],
-        status: 'Live',
-      },
-      {
-        title: 'AI Shop Assistant',
-        description: 'Intelligent shopping assistant powered by artificial intelligence.',
-        tech: ['Python', 'AI/ML', 'E-commerce', 'Chatbot'],
-        status: 'Live',
-      },
-      {
-        title: 'offline-chat',
-        description: 'A privacy-focused, peer-to-peer chat platform for secure and decentralized communication.',
-        tech: ['JavaScript', 'WebRTC', 'Node.js', 'Security'],
-        status: 'Live',
-      },
-      {
-        title: 'Molecular Docking Journey',
-        description: 'Scientific computing project focused on molecular docking and bioinformatics.',
-        tech: ['Python', 'Jupyter Notebook', 'Bioinformatics', 'Scientific Computing'],
-        status: 'Live',
-      },
-      // --- Fake, large, professional-sounding projects ---
-      {
-        title: 'Sentinel AI Threat Detection',
-        description: 'Enterprise-grade AI system for real-time threat detection, anomaly analysis, and automated incident response in large-scale networks.',
-        tech: ['Python', 'TensorFlow', 'PyTorch', 'Docker', 'Kubernetes', 'Cybersecurity'],
-        status: 'Live',
-      },
-      {
-        title: 'OrvCloud Automation Suite',
-        description: 'A robust cloud automation platform enabling seamless CI/CD, infrastructure as code, and smart resource scaling for modern DevOps teams.',
-        tech: ['TypeScript', 'React', 'Node.js', 'AWS', 'Terraform', 'CI/CD'],
-        status: 'Live',
-      },
-      {
-        title: 'NeuroVision OCR',
-        description: 'Advanced AI-powered OCR engine for extracting structured data from complex documents and images, with support for multiple languages.',
-        tech: ['Python', 'OpenCV', 'Tesseract', 'Deep Learning', 'FastAPI'],
-        status: 'Live',
-      },
-      {
-        title: 'Quantum Secure Messenger',
-        description: 'Next-gen encrypted messenger leveraging quantum-resistant algorithms for ultra-secure business and personal communication.',
-        tech: ['Go', 'React Native', 'Post-Quantum Cryptography', 'WebRTC'],
-        status: 'Live',
-      },
-      {
-        title: 'Orv Analytics Platform',
-        description: 'A scalable analytics platform for real-time data processing, visualization, and actionable insights for enterprise clients.',
-        tech: ['TypeScript', 'React', 'D3.js', 'Node.js', 'Kafka', 'Big Data'],
-        status: 'Live',
-      },
-    ],
   },
   contact: {
     terminalName: 'contact-terminal',
     terminalCommands: [
-      { prompt: '$', command: 'ping contact@orv.dev' },
+      { prompt: '$', command: 'ping poriya.saw@gmail.com' },
       { prompt: '$', command: 'initiate-connection', blink: true },
     ],
     heading: "Let's Connect",
@@ -155,21 +77,31 @@ const content = {
     info: [
       { 
         icon: 'blue', 
-        label: 'contact@orv.dev',
-        href: 'mailto:contact@orv.dev',
-        type: 'email'
+        label: 'poriya.saw@gmail.com',
+        href: 'mailto:poriya.saw@gmail.com',
+        type: 'email',
+        description: 'Send me an email'
       },
       { 
         icon: 'purple', 
-        label: 'GitHub: github.com/ItsOrv',
+        label: 'github.com/ItsOrv',
         href: 'https://github.com/ItsOrv',
-        type: 'github'
+        type: 'github',
+        description: 'Follow me on GitHub'
       },
       { 
         icon: 'indigo', 
-        label: 'Telegram: t.me/Pouria_Orv',
+        label: 't.me/Pouria_Orv',
         href: 'https://t.me/Pouria_Orv',
-        type: 'telegram'
+        type: 'telegram',
+        description: 'Chat on Telegram'
+      },
+      { 
+        icon: 'green', 
+        label: 't.me/Orv_Codes',
+        href: 'https://t.me/Orv_Codes',
+        type: 'telegramChannel',
+        description: 'Join my coding channel'
       },
     ],
   },
@@ -179,9 +111,7 @@ const content = {
     tech: 'Built with React, TypeScript, Tailwind CSS, Framer Motion, GSAP & Lenis.',
     eof: 'EOF',
   },
-};
+}
 
-// Named exports for components
-export const { hero, about, skills, projects, contact, footer } = content;
-
-export default content; 
+export const { hero, about, skills, projects, contact, footer } = content
+export default content 
