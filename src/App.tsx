@@ -4,8 +4,8 @@ import { motion, useScroll, useTransform } from 'framer-motion'
 import { gsap } from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import { hero, about, skills, projects, contact, footer } from './content'
+import { getFeaturedProjects } from './data/projects'
 
-// Lazy load components for better performance
 const AboutSection = lazy(() => import('./components/AboutSection'))
 const SkillsSection = lazy(() => import('./components/SkillsSection'))
 const ProjectsSection = lazy(() => import('./components/ProjectsSection'))
@@ -18,14 +18,18 @@ gsap.registerPlugin(ScrollTrigger)
 
 function App() {
   const containerRef = useRef<HTMLDivElement>(null)
+  const lastTouchYRef = useRef<number>(0)
   const { scrollYProgress } = useScroll()
   
   const progressWidth = useTransform(scrollYProgress, [0, 1], ['0%', '100%'])
   const headerOpacity = useTransform(scrollYProgress, [0, 0.1], [0, 1])
-  
-  // Removed animated background elements for cleaner experience
 
   useEffect(() => {
+    // Check if we're in browser environment
+    if (typeof window === 'undefined' || typeof navigator === 'undefined') {
+      return
+    }
+
     // Detect mobile device and performance mode
     const isMobile = /Android|iPhone|iPad|iPod|Opera Mini|IEMobile|WPDesktop/i.test(navigator.userAgent)
     const isLowEnd = navigator.hardwareConcurrency && navigator.hardwareConcurrency < 4
@@ -45,24 +49,34 @@ function App() {
           const scrollTop = document.documentElement.scrollTop || document.body.scrollTop
           const scrollHeight = document.documentElement.scrollHeight || document.body.scrollHeight
           const clientHeight = document.documentElement.clientHeight || window.innerHeight
+          const currentTouchY = e.touches[0]?.clientY || 0
           
-          // Prevent overscroll at top
-          if (scrollTop <= 0 && e.touches[0].clientY > e.touches[0].clientY) {
+          // Prevent overscroll at top (scrolling up when already at top)
+          if (scrollTop <= 0 && currentTouchY > lastTouchYRef.current) {
             e.preventDefault()
           }
           
-          // Prevent overscroll at bottom
-          if (scrollTop + clientHeight >= scrollHeight && e.touches[0].clientY < e.touches[0].clientY) {
+          // Prevent overscroll at bottom (scrolling down when already at bottom)
+          if (scrollTop + clientHeight >= scrollHeight && currentTouchY < lastTouchYRef.current) {
             e.preventDefault()
           }
+          
+          lastTouchYRef.current = currentTouchY
         }
       }
       
-      document.addEventListener('touchstart', preventOverscroll, { passive: false })
+      const handleTouchStart = (e: TouchEvent) => {
+        if (e.touches[0]) {
+          lastTouchYRef.current = e.touches[0].clientY
+        }
+        preventOverscroll(e)
+      }
+      
+      document.addEventListener('touchstart', handleTouchStart, { passive: false })
       document.addEventListener('touchmove', preventOverscroll, { passive: false })
       
       return () => {
-        document.removeEventListener('touchstart', preventOverscroll)
+        document.removeEventListener('touchstart', handleTouchStart)
         document.removeEventListener('touchmove', preventOverscroll)
       }
     }
@@ -78,71 +92,108 @@ function App() {
       ...((isMobile || isLowEnd || prefersReducedMotion) && { smooth: false }), // Disable smooth scroll
     })
 
+    let rafId: number | null = null
     function raf(time: number) {
       lenis.raf(time)
-      requestAnimationFrame(raf)
+      rafId = requestAnimationFrame(raf)
     }
 
-    requestAnimationFrame(raf)
+    rafId = requestAnimationFrame(raf)
 
     // Optimized GSAP animations for better performance
-    const sections = gsap.utils.toArray('.executive-section')
-    
-    sections.forEach((section, index: number) => {
-      // Skip animations on low-end devices or reduced motion preference
-      if (isLowEnd || prefersReducedMotion) {
-        gsap.set(section as Element, { opacity: 1, y: 0, scale: 1 })
-        return
+    try {
+      const sections = gsap.utils.toArray('.executive-section')
+      
+      if (sections && sections.length > 0) {
+        sections.forEach((section, index: number) => {
+          // Skip animations on low-end devices or reduced motion preference
+          if (isLowEnd || prefersReducedMotion) {
+            gsap.set(section as Element, { opacity: 1, y: 0, scale: 1 })
+            return
+          }
+
+          try {
+            const tl = gsap.timeline({
+              scrollTrigger: {
+                trigger: section as Element,
+                start: 'top 85%', // Earlier trigger for smoother experience
+                end: 'bottom 15%',
+                toggleActions: 'play none none reverse',
+                once: false, // Allow re-triggering
+              }
+            })
+
+            // Smooth entrance animation without jumping
+            gsap.set(section as Element, { 
+              opacity: 0, 
+              y: 30, // Reduced movement
+              scale: 0.99, // Reduced scale
+            })
+
+            tl.to(section as Element, { 
+              opacity: 1, 
+              y: 0, 
+              scale: 1,
+              duration: 0.6, // Further reduced duration
+              ease: 'power2.out',
+              delay: index * 0.03 // Further reduced stagger delay
+            })
+          } catch (error) {
+            // Fallback: set section to visible if animation fails
+            console.warn('GSAP animation failed for section:', error)
+            gsap.set(section as Element, { opacity: 1, y: 0, scale: 1 })
+          }
+        })
       }
-
-      const tl = gsap.timeline({
-        scrollTrigger: {
-          trigger: section as Element,
-          start: 'top 85%', // Earlier trigger for smoother experience
-          end: 'bottom 15%',
-          toggleActions: 'play none none reverse',
-          once: false, // Allow re-triggering
-        }
-      })
-
-      // Smooth entrance animation without jumping
-      gsap.set(section as Element, { 
-        opacity: 0, 
-        y: 30, // Reduced movement
-        scale: 0.99, // Reduced scale
-      })
-
-      tl.to(section as Element, { 
-        opacity: 1, 
-        y: 0, 
-        scale: 1,
-        duration: 0.6, // Further reduced duration
-        ease: 'power2.out',
-        delay: index * 0.03 // Further reduced stagger delay
-      })
-    })
+    } catch (error) {
+      console.warn('GSAP initialization failed:', error)
+    }
 
     // Smooth navigation scrolling
+    const handleNavClick = (e: Event) => {
+      e.preventDefault()
+      const link = e.currentTarget as HTMLAnchorElement
+      const targetId = link.getAttribute('href')?.slice(1)
+      if (targetId) {
+        const target = document.getElementById(targetId)
+        if (target) {
+          lenis.scrollTo(target, {
+            offset: -100, // Account for header
+            duration: 1.5, // Reduced duration
+          })
+        } else {
+          console.warn(`Navigation target not found: #${targetId}`)
+        }
+      }
+    }
+
     const navLinks = document.querySelectorAll('a[href^="#"]')
     navLinks.forEach(link => {
-      link.addEventListener('click', (e) => {
-        e.preventDefault()
-        const targetId = (e.target as HTMLAnchorElement).getAttribute('href')?.slice(1)
-        if (targetId) {
-          const target = document.getElementById(targetId)
-          if (target) {
-            lenis.scrollTo(target, {
-              offset: -100, // Account for header
-              duration: 1.5, // Reduced duration
-            })
-          }
-        }
-      })
+      link.addEventListener('click', handleNavClick)
     })
 
     return () => {
+      // Cancel animation frame to prevent memory leaks
+      if (rafId !== null) {
+        cancelAnimationFrame(rafId)
+        rafId = null
+      }
+      
+      // Cleanup Lenis
       lenis.destroy()
+      
+      // Cleanup ScrollTrigger
       ScrollTrigger.getAll().forEach(trigger => trigger.kill())
+      
+      // Cleanup navigation listeners
+      navLinks.forEach(link => {
+        link.removeEventListener('click', handleNavClick)
+      })
+      
+      // Restore body overflow
+      if (isMobile) {
+        document.body.style.overscrollBehaviorY = ''
+      }
     }
   }, [])
 
@@ -415,6 +466,39 @@ function App() {
       <Suspense fallback={null}>
         <BackgroundMusic />
       </Suspense>
+
+      {/* Structured Data for Projects */}
+      {typeof window !== 'undefined' && (
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              '@context': 'https://schema.org',
+              '@type': 'ItemList',
+              name: 'Featured Projects',
+              description: 'A collection of featured projects by Orv',
+              itemListElement: getFeaturedProjects().map((project, index) => ({
+                '@type': 'SoftwareApplication',
+                position: index + 1,
+                name: project.title,
+                description: project.description,
+                applicationCategory: project.category,
+                operatingSystem: 'Web',
+                offers: {
+                  '@type': 'Offer',
+                  price: '0',
+                  priceCurrency: 'USD'
+                },
+                ...(project.githubUrl && { codeRepository: project.githubUrl }),
+                ...(project.liveUrl && { url: project.liveUrl }),
+                ...(project.technologies && project.technologies.length > 0 && { 
+                  programmingLanguage: project.technologies 
+                })
+              }))
+            })
+          }}
+        />
+      )}
         </div>
       </ErrorBoundary>
     </Suspense>
