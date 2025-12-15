@@ -1,6 +1,6 @@
 import type { Project } from '../../types/project'
 
-const aiPdfTranslate: Project = {
+export const aiPdfTranslate: Project = {
   id: 'ai-pdf-translate',
   title: 'AI PDF Translator',
   shortDescription: 'Intelligent PDF translation tool using AI to accurately translate documents while preserving formatting and layout.',
@@ -11,8 +11,6 @@ const aiPdfTranslate: Project = {
   status: 'completed',
   featured: true,
   githubUrl: 'https://github.com/ItsOrv/Ai-PDF-Translate',
-  liveUrl: undefined,
-  demoUrl: undefined,
   startDate: '2025-09-01',
   endDate: '2025-09-18',
   team: ['ItsOrv'],
@@ -35,7 +33,6 @@ const aiPdfTranslate: Project = {
     'User-friendly interface with drag-and-drop functionality'
   ],
   screenshots: [],
-  videoUrl: undefined,
   tags: ['ai', 'translation', 'pdf', 'ocr', 'document-processing', 'machine-learning'],
   difficulty: 'advanced',
   timeSpent: '2 weeks',
@@ -43,4 +40,3 @@ const aiPdfTranslate: Project = {
   industry: 'Document Processing'
 }
 
-export default aiPdfTranslate

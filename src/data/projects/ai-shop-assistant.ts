@@ -1,6 +1,6 @@
 import type { Project } from '../../types/project'
 
-const aiShopAssistant: Project = {
+export const aiShopAssistant: Project = {
   id: 'ai-shop-assistant',
   title: 'AI Shop Assistant',
   shortDescription: 'Intelligent shopping assistant powered by AI to help users find products, compare prices, and make informed purchasing decisions.',
@@ -11,8 +11,6 @@ const aiShopAssistant: Project = {
   status: 'completed',
   featured: true,
   githubUrl: 'https://github.com/ItsOrv/Ai-Shop-Assistant',
-  liveUrl: undefined,
-  demoUrl: undefined,
   startDate: '2025-06-01',
   endDate: '2025-06-01',
   team: ['ItsOrv'],
@@ -35,7 +33,6 @@ const aiShopAssistant: Project = {
     'User-friendly interface with natural language queries'
   ],
   screenshots: [],
-  videoUrl: undefined,
   tags: ['ai', 'shopping', 'e-commerce', 'price-comparison', 'recommendation', 'web-scraping'],
   difficulty: 'advanced',
   timeSpent: '3 weeks',
@@ -43,4 +40,3 @@ const aiShopAssistant: Project = {
   industry: 'E-commerce'
 }
 
-export default aiShopAssistant

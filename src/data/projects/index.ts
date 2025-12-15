@@ -2,11 +2,11 @@ import type { Project, ProjectCategory } from '../../types/project'
 import { telegramBotManager } from './telegram-bot-manager'
 import { cybersecurityDashboard } from './cybersecurity-dashboard'
 import { aiAutomationTool } from './ai-automation-tool'
-import telegramPanel from './telegram-panel'
-import telegramChainStore from './telegram-chain-store'
-import aiPdfTranslate from './ai-pdf-translate'
-import aiShopAssistant from './ai-shop-assistant'
-import orvHub from './orv-hub'
+import { telegramPanel } from './telegram-panel'
+import { telegramChainStore } from './telegram-chain-store'
+import { aiPdfTranslate } from './ai-pdf-translate'
+import { aiShopAssistant } from './ai-shop-assistant'
+import { orvHub } from './orv-hub'
 
 // Export all projects
 export const projects: Project[] = [

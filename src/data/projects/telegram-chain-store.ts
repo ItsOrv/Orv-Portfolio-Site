@@ -1,6 +1,6 @@
 import type { Project } from '../../types/project'
 
-const telegramChainStore: Project = {
+export const telegramChainStore: Project = {
   id: 'telegram-chain-store',
   title: 'Telegram Chain Store Bot',
   shortDescription: 'Versatile Telegram bot for seamless e-commerce experiences with transaction handling and store management.',
@@ -11,8 +11,6 @@ const telegramChainStore: Project = {
   status: 'completed',
   featured: true,
   githubUrl: 'https://github.com/ItsOrv/Telegram-Chain-Store',
-  liveUrl: undefined,
-  demoUrl: undefined,
   startDate: '2025-07-01',
   endDate: '2025-07-18',
   team: ['ItsOrv'],
@@ -35,7 +33,6 @@ const telegramChainStore: Project = {
     'Scalable architecture for growing businesses'
   ],
   screenshots: [],
-  videoUrl: undefined,
   tags: ['telegram', 'e-commerce', 'bot', 'payments', 'store', 'business'],
   difficulty: 'advanced',
   timeSpent: '3 weeks',
@@ -43,4 +40,3 @@ const telegramChainStore: Project = {
   industry: 'E-commerce'
 }
 
-export default telegramChainStore

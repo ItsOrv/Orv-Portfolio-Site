@@ -1,6 +1,6 @@
 import type { Project } from '../../types/project'
 
-const telegramPanel: Project = {
+export const telegramPanel: Project = {
   id: 'telegram-panel',
   title: 'Telegram Panel',
   shortDescription: 'Comprehensive tool for managing multiple Telegram accounts, monitoring groups/channels, and automated message forwarding.',
@@ -11,8 +11,6 @@ const telegramPanel: Project = {
   status: 'completed',
   featured: true,
   githubUrl: 'https://github.com/ItsOrv/Telegram-Panel',
-  liveUrl: undefined,
-  demoUrl: undefined,
   startDate: '2025-07-01',
   endDate: '2025-07-18',
   team: ['ItsOrv'],
@@ -35,12 +33,9 @@ const telegramPanel: Project = {
     'MIT License for open-source collaboration'
   ],
   screenshots: [],
-  videoUrl: undefined,
   tags: ['telegram', 'automation', 'multi-account', 'monitoring', 'telethon'],
   difficulty: 'advanced',
   timeSpent: '2 weeks',
   client: 'Open Source',
   industry: 'Social Media Management'
 }
-
-export default telegramPanel

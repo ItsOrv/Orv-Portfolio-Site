@@ -1,6 +1,6 @@
 import type { Project } from '../../types/project'
 
-const orvHub: Project = {
+export const orvHub: Project = {
   id: 'orv-hub',
   title: 'Orv Hub',
   shortDescription: 'Comprehensive development hub and project management platform built with modern web technologies.',
@@ -11,8 +11,6 @@ const orvHub: Project = {
   status: 'completed',
   featured: true,
   githubUrl: 'https://github.com/ItsOrv/Orv-Hub',
-  liveUrl: undefined,
-  demoUrl: undefined,
   startDate: '2025-06-01',
   endDate: '2025-06-01',
   team: ['ItsOrv'],
@@ -35,7 +33,6 @@ const orvHub: Project = {
     'Scalable architecture supporting multiple concurrent projects'
   ],
   screenshots: [],
-  videoUrl: undefined,
   tags: ['typescript', 'react', 'project-management', 'collaboration', 'real-time', 'development-hub'],
   difficulty: 'advanced',
   timeSpent: '4 weeks',
@@ -43,4 +40,3 @@ const orvHub: Project = {
   industry: 'Software Development'
 }
 
-export default orvHub
