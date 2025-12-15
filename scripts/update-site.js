@@ -184,10 +184,10 @@ function commitAndPush(commitMessage) {
 function showDeploymentStatus() {
   log.status('Checking deployment status...');
   console.log('You can check the deployment status at:');
-  console.log(`${colors.cyan}https://github.com/ItsOrv/Orv-Site/actions${colors.reset}`);
+  console.log(`${colors.cyan}https://github.com/ItsOrv/Orv-Portfolio-Site/actions${colors.reset}`);
   console.log('');
   console.log('Your site will be available at:');
-  console.log(`${colors.cyan}https://itsorv.github.io/Orv-Site/${colors.reset}`);
+  console.log(`${colors.cyan}https://itsorv.github.io/Orv-Portfolio-Site/${colors.reset}`);
 }
 
 // Get user input
@@ -260,7 +260,7 @@ async function main() {
   // Confirm deployment
   if (!options.force) {
     console.log('');
-    log.warning('This will deploy your changes to https://itsorv.github.io/Orv-Site/');
+    log.warning('This will deploy your changes to https://itsorv.github.io/Orv-Portfolio-Site/');
     const confirm = await getUserInput('Are you sure you want to continue? (y/N): ');
     if (confirm.toLowerCase() !== 'y') {
       log.info('Deployment cancelled.');

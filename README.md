@@ -40,8 +40,8 @@ This portfolio showcases professional work, skills, and projects with an emphasi
 
 ```bash
 # Clone the repository
-git clone https://github.com/ItsOrv/Orv-Site.git
-cd Orv-Site
+git clone https://github.com/ItsOrv/Orv-Portfolio-Site.git
+cd Orv-Portfolio-Site
 
 # Install dependencies
 npm install

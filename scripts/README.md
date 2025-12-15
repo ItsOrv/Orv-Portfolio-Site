@@ -96,7 +96,7 @@ The deployment is handled by GitHub Actions (`.github/workflows/deploy.yml`):
 - **Trigger**: Push to `main` or `master` branch
 - **Build**: Installs dependencies and builds the project
 - **Deploy**: Automatically deploys to GitHub Pages
-- **Status**: Available at `https://github.com/ItsOrv/Orv-Site/actions`
+- **Status**: Available at `https://github.com/ItsOrv/Orv-Portfolio-Site/actions`
 
 ## Troubleshooting
 
@@ -120,7 +120,7 @@ The deployment is handled by GitHub Actions (`.github/workflows/deploy.yml`):
 
 ### Getting Help
 
-- Check the GitHub Actions logs: `https://github.com/ItsOrv/Orv-Site/actions`
+- Check the GitHub Actions logs: `https://github.com/ItsOrv/Orv-Portfolio-Site/actions`
 - Review the build output for specific error messages
 - Ensure all environment variables are properly set
 

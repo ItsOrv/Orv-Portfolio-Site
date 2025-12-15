@@ -100,10 +100,10 @@ REM Show deployment status
 :show_deployment_status
 call :print_status "Checking deployment status..."
 echo You can check the deployment status at:
-echo https://github.com/ItsOrv/Orv-Site/actions
+echo https://github.com/ItsOrv/Orv-Portfolio-Site/actions
 echo.
 echo Your site will be available at:
-echo https://itsorv.github.io/Orv-Site/
+echo https://itsorv.github.io/Orv-Portfolio-Site/
 goto :eof
 
 REM Show help
@@ -242,7 +242,7 @@ if "%commit_message%"=="" (
 REM Confirm deployment
 if "%force_deploy%"=="false" (
     echo.
-    call :print_warning "This will deploy your changes to https://itsorv.github.io/Orv-Site/"
+    call :print_warning "This will deploy your changes to https://itsorv.github.io/Orv-Portfolio-Site/"
     set /p "confirm=Are you sure you want to continue? (y/N): "
     if /i not "!confirm!"=="y" (
         call :print_status "Deployment cancelled."

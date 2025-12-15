@@ -170,10 +170,10 @@ function Invoke-CommitAndPush {
 function Show-DeploymentStatus {
     Write-Status "Checking deployment status..."
     Write-Host "You can check the deployment status at:" -ForegroundColor $Colors.White
-    Write-Host "https://github.com/ItsOrv/Orv-Site/actions" -ForegroundColor $Colors.Blue
+    Write-Host "https://github.com/ItsOrv/Orv-Portfolio-Site/actions" -ForegroundColor $Colors.Blue
     Write-Host ""
     Write-Host "Your site will be available at:" -ForegroundColor $Colors.White
-    Write-Host "https://itsorv.github.io/Orv-Site/" -ForegroundColor $Colors.Blue
+    Write-Host "https://itsorv.github.io/Orv-Portfolio-Site/" -ForegroundColor $Colors.Blue
 }
 
 # Main execution
@@ -229,7 +229,7 @@ if (-not $CommitMessage) {
 # Confirm deployment
 if (-not $Force) {
     Write-Host ""
-    Write-Warning "This will deploy your changes to https://itsorv.github.io/Orv-Site/"
+    Write-Warning "This will deploy your changes to https://itsorv.github.io/Orv-Portfolio-Site/"
     $confirm = Read-Host "Are you sure you want to continue? (y/N)"
     if ($confirm -notmatch "^[Yy]$") {
         Write-Status "Deployment cancelled."

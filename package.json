@@ -3,7 +3,7 @@
   "private": true,
   "version": "0.0.0",
   "type": "module",
-  "homepage": "https://itsorv.github.io/Orv-Site",
+  "homepage": "https://itsorv.github.io/Orv-Portfolio-Site",
   "scripts": {
     "dev": "vite",
     "build": "tsc -b && vite build",

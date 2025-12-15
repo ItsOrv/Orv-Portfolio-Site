@@ -6,7 +6,7 @@ This guide will help you deploy your portfolio website to GitHub Pages with auto
 
 Before you can deploy your site, make sure you have:
 
-1. **GitHub Account** with the repository `ItsOrv/Orv-Site`
+1. **GitHub Account** with the repository `ItsOrv/Orv-Portfolio-Site`
 2. **Node.js 18+** installed on your system
 3. **Git** configured with your GitHub credentials
 4. **GitHub Pages** enabled in your repository settings
@@ -15,7 +15,7 @@ Before you can deploy your site, make sure you have:
 
 ### 1. Enable GitHub Pages
 
-1. Go to your repository: `https://github.com/ItsOrv/Orv-Site`
+1. Go to your repository: `https://github.com/ItsOrv/Orv-Portfolio-Site`
 2. Click on **Settings** tab
 3. Scroll down to **Pages** section
 4. Under **Source**, select **GitHub Actions**
@@ -40,7 +40,7 @@ You have several options for Git authentication:
 #### Option B: SSH Key
 1. Generate SSH key: `ssh-keygen -t ed25519 -C "your_email@example.com"`
 2. Add the public key to your GitHub account
-3. Use SSH URL: `git@github.com:ItsOrv/Orv-Site.git`
+3. Use SSH URL: `git@github.com:ItsOrv/Orv-Portfolio-Site.git`
 
 #### Option C: GitHub CLI
 ```bash
@@ -51,7 +51,7 @@ npm install -g @github/cli
 gh auth login
 
 # Clone with authentication
-gh repo clone ItsOrv/Orv-Site
+gh repo clone ItsOrv/Orv-Portfolio-Site
 ```
 
 ## 🚀 Deployment Methods
@@ -158,12 +158,12 @@ npm run update -- -s
 ## 🔍 Monitoring Deployment
 
 ### 1. GitHub Actions
-- Go to: `https://github.com/ItsOrv/Orv-Site/actions`
+- Go to: `https://github.com/ItsOrv/Orv-Portfolio-Site/actions`
 - Check the status of your deployment
 - View logs if there are any issues
 
 ### 2. Your Live Site
-- URL: `https://itsorv.github.io/Orv-Site/`
+- URL: `https://itsorv.github.io/Orv-Portfolio-Site/`
 - It may take 5-10 minutes for changes to be live
 
 ### 3. Build Status
@@ -179,7 +179,7 @@ The GitHub Actions workflow will:
 
 #### 1. Authentication Error (403)
 ```
-remote: Permission to ItsOrv/Orv-Site.git denied
+remote: Permission to ItsOrv/Orv-Portfolio-Site.git denied
 ```
 **Solution:**
 - Use Personal Access Token instead of password
@@ -206,7 +206,7 @@ Build failed in 18.11s
 - Wait 5-10 minutes for GitHub Pages to update
 - Check GitHub Actions logs for errors
 - Clear browser cache
-- Check the correct URL: `https://itsorv.github.io/Orv-Site/`
+- Check the correct URL: `https://itsorv.github.io/Orv-Portfolio-Site/`
 
 ## 📊 Performance Monitoring
 
@@ -250,7 +250,7 @@ Once everything is set up, you can update your portfolio with a simple command:
 npm run update "Add new project showcase"
 ```
 
-Your site will be automatically updated at: `https://itsorv.github.io/Orv-Site/`
+Your site will be automatically updated at: `https://itsorv.github.io/Orv-Portfolio-Site/`
 
 ---
 

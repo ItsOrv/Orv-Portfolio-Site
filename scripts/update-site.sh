@@ -100,10 +100,10 @@ commit_and_push() {
 show_deployment_status() {
     print_status "Checking deployment status..."
     echo "You can check the deployment status at:"
-    echo "https://github.com/ItsOrv/Orv-Site/actions"
+    echo "https://github.com/ItsOrv/Orv-Portfolio-Site/actions"
     echo ""
     echo "Your site will be available at:"
-    echo "https://itsorv.github.io/Orv-Site/"
+    echo "https://itsorv.github.io/Orv-Portfolio-Site/"
 }
 
 # Function to show help
@@ -208,7 +208,7 @@ main() {
     # Confirm deployment
     if [ "$force_deploy" = false ]; then
         echo ""
-        print_warning "This will deploy your changes to https://itsorv.github.io/Orv-Site/"
+        print_warning "This will deploy your changes to https://itsorv.github.io/Orv-Portfolio-Site/"
         read -p "Are you sure you want to continue? (y/N): " -n 1 -r
         echo
         if [[ ! $REPLY =~ ^[Yy]$ ]]; then

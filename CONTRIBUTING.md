@@ -14,8 +14,8 @@ Thank you for your interest in contributing to this project! This document provi
 
 1. Clone the repository:
 ```bash
-git clone https://github.com/ItsOrv/Orv-Site.git
-cd Orv-Site
+git clone https://github.com/ItsOrv/Orv-Portfolio-Site.git
+cd Orv-Portfolio-Site
 ```
 
 2. Install dependencies:
