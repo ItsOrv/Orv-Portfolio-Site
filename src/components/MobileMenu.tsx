@@ -86,7 +86,13 @@ const MobileMenu = () => {
               initial={{ opacity: 0, x: '100%' }}
               animate={{ opacity: 1, x: 0 }}
               exit={{ opacity: 0, x: '100%' }}
-              transition={{ duration: 0.3, ease: [0.16, 1, 0.3, 1] }}
+              transition={{ 
+                duration: 0.25, 
+                ease: [0.16, 1, 0.3, 1],
+                type: 'spring',
+                stiffness: 300,
+                damping: 30
+              }}
               className="fixed top-0 right-0 h-full w-80 max-w-[85vw] bg-slate-900/95 backdrop-blur-xl border-l border-slate-800/50 z-50 p-6"
             >
               {/* Menu Header */}
@@ -113,7 +119,13 @@ const MobileMenu = () => {
                     onClick={handleLinkClick}
                     initial={{ opacity: 0, x: 20 }}
                     animate={{ opacity: 1, x: 0 }}
-                    transition={{ delay: index * 0.1 }}
+                    transition={{ 
+                      delay: index * 0.08,
+                      duration: 0.3,
+                      ease: [0.16, 1, 0.3, 1]
+                    }}
+                    whileHover={{ x: 4 }}
+                    whileTap={{ scale: 0.98 }}
                     className="block px-4 py-4 rounded-xl text-slate-300 hover:text-white hover:bg-slate-800/50 transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 focus:ring-offset-slate-900 min-h-[48px] flex items-center"
                     aria-label={`Navigate to ${item.name} section`}
                   >

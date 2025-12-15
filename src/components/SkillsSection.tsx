@@ -12,7 +12,8 @@ const SkillsSection = () => {
       </div>
 
       <div className="grid md:grid-cols-2 gap-8">
-        {skills.list.map((skill, index) => (
+        {skills.list && skills.list.length > 0 ? (
+          skills.list.map((skill, index) => (
           <div
             key={skill.name}
             className="premium-card"
@@ -33,7 +34,12 @@ const SkillsSection = () => {
               </div>
             </div>
           </div>
-        ))}
+          ))
+        ) : (
+          <div className="col-span-2 text-center py-8">
+            <p className="text-slate-400">Skills information coming soon.</p>
+          </div>
+        )}
       </div>
     </div>
   )

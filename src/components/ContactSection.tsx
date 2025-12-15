@@ -1,37 +1,9 @@
 import { motion } from 'framer-motion'
 import { Mail, Github, Send, ExternalLink, Users } from 'lucide-react'
+import { contact } from '../content'
 
 const ContactSection = () => {
-  const contactInfo = [
-    {
-      type: 'email',
-      label: 'poriya.saw@gmail.com',
-      href: 'mailto:poriya.saw@gmail.com',
-      icon: 'blue',
-      description: 'Send me an email'
-    },
-    {
-      type: 'github',
-      label: 'github.com/ItsOrv',
-      href: 'https://github.com/ItsOrv',
-      icon: 'purple',
-      description: 'Follow me on GitHub'
-    },
-    {
-      type: 'telegram',
-      label: 't.me/Pouria_Orv',
-      href: 'https://t.me/Pouria_Orv',
-      icon: 'indigo',
-      description: 'Chat on Telegram'
-    },
-    {
-      type: 'telegramChannel',
-      label: 't.me/Orv_Codes',
-      href: 'https://t.me/Orv_Codes',
-      icon: 'green',
-      description: 'Join my coding channel'
-    }
-  ]
+  const contactInfo = contact.info
 
   const getIcon = (type: string) => {
     switch (type) {
@@ -57,9 +29,9 @@ const ContactSection = () => {
         viewport={{ once: true }}
         className="text-center mb-16"
       >
-        <h2 className="heading-section mb-8">Let's Connect</h2>
+        <h2 className="heading-section mb-8">{contact.heading}</h2>
         <p className="subheading-executive mx-auto">
-          Ready to discuss your next project or collaboration
+          {contact.subheading}
         </p>
       </motion.div>
 
@@ -74,7 +46,8 @@ const ContactSection = () => {
           <div className="premium-card-content">
             <h3 className="text-2xl font-bold text-slate-200 mb-8 text-center">Get In Touch</h3>
             <div className="space-y-4">
-              {contactInfo.map((item) => (
+              {contactInfo && contactInfo.length > 0 ? (
+                contactInfo.map((item) => (
                 <a
                   key={item.type}
                   href={item.href}
@@ -114,7 +87,10 @@ const ContactSection = () => {
                     </div>
                   </div>
                 </a>
-              ))}
+                ))
+              ) : (
+                <p className="text-slate-400 text-center py-8">Contact information coming soon.</p>
+              )}
             </div>
           </div>
         </div>
