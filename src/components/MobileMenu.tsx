@@ -1,9 +1,13 @@
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useRef } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { Menu, X } from 'lucide-react'
+import { useFocusTrap } from '../hooks/useFocusTrap'
+import { announceToScreenReader } from '../utils/a11yAnnounce'
 
 const MobileMenu = () => {
   const [isOpen, setIsOpen] = useState(false)
+  const menuButtonRef = useRef<HTMLButtonElement>(null)
+  const containerRef = useFocusTrap(isOpen)
 
   const menuItems = [
     { name: 'About', href: '#about' },
@@ -49,13 +53,25 @@ const MobileMenu = () => {
 
   const handleLinkClick = () => {
     setIsOpen(false)
+    announceToScreenReader('Menu closed')
+    // Return focus to menu button
+    setTimeout(() => {
+      menuButtonRef.current?.focus()
+    }, 100)
+  }
+
+  const handleToggle = () => {
+    const newState = !isOpen
+    setIsOpen(newState)
+    announceToScreenReader(newState ? 'Menu opened' : 'Menu closed')
   }
 
   return (
     <div className="mobile-menu lg:hidden">
       {/* Menu Button */}
       <button
-        onClick={() => setIsOpen(!isOpen)}
+        ref={menuButtonRef}
+        onClick={handleToggle}
         className="relative z-50 p-3 rounded-lg bg-slate-800/50 backdrop-blur-sm border border-slate-700/50 text-slate-300 hover:text-white hover:bg-slate-700/50 transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 focus:ring-offset-slate-950 min-h-[44px] min-w-[44px]"
         aria-label={isOpen ? 'Close menu' : 'Open menu'}
         aria-expanded={isOpen}
@@ -83,6 +99,7 @@ const MobileMenu = () => {
 
             {/* Menu Panel */}
             <motion.div
+              ref={containerRef as React.RefObject<HTMLDivElement>}
               initial={{ opacity: 0, x: '100%' }}
               animate={{ opacity: 1, x: 0 }}
               exit={{ opacity: 0, x: '100%' }}
@@ -94,6 +111,9 @@ const MobileMenu = () => {
                 damping: 30
               }}
               className="fixed top-0 right-0 h-full w-80 max-w-[85vw] bg-slate-900/95 backdrop-blur-xl border-l border-slate-800/50 z-50 p-6"
+              role="dialog"
+              aria-modal="true"
+              aria-label="Navigation menu"
             >
               {/* Menu Header */}
               <div className="flex items-center justify-between mb-8">
@@ -102,7 +122,7 @@ const MobileMenu = () => {
                   <span className="font-mono text-sm text-slate-400">Orv.dev</span>
                 </div>
                 <button
-                  onClick={() => setIsOpen(false)}
+                  onClick={handleToggle}
                   className="p-2 rounded-lg text-slate-400 hover:text-white hover:bg-slate-800/50 transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-blue-500"
                   aria-label="Close menu"
                 >

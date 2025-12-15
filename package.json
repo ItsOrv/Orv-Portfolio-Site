@@ -14,7 +14,11 @@
     "update": "node scripts/update-site.js",
     "update:linux": "./scripts/update-site.sh",
     "update:windows": "scripts\\update-site.bat",
-    "update:powershell": "powershell -ExecutionPolicy Bypass -File scripts/update-site.ps1"
+    "update:powershell": "powershell -ExecutionPolicy Bypass -File scripts/update-site.ps1",
+    "test": "vitest",
+    "test:ui": "vitest --ui",
+    "test:run": "vitest run",
+    "test:coverage": "vitest run --coverage"
   },
   "dependencies": {
     "@gsap/react": "^2.1.2",

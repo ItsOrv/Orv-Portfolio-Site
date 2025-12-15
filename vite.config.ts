@@ -20,6 +20,8 @@ export default defineConfig({
     },
     // Enable compression
     minify: 'esbuild',
+    // Copy service worker to dist
+    copyPublicDir: true,
   },
   // Optimize dependencies
   optimizeDeps: {

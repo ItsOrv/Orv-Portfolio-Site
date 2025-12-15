@@ -15,10 +15,24 @@ const ProjectsSection = () => {
       // If same project is clicked, close it
       setSelectedProject(null)
       setSelectedScreenshotIndex(0)
+      // Announce to screen readers
+      if (typeof window !== 'undefined' && window.dispatchEvent) {
+        const event = new CustomEvent('a11y-announce', { 
+          detail: `Closed details for ${project.title}` 
+        })
+        window.dispatchEvent(event)
+      }
     } else {
       // Open new project details
       setSelectedProject(project)
       setSelectedScreenshotIndex(0)
+      // Announce to screen readers
+      if (typeof window !== 'undefined' && window.dispatchEvent) {
+        const event = new CustomEvent('a11y-announce', { 
+          detail: `Opened details for ${project.title}` 
+        })
+        window.dispatchEvent(event)
+      }
     }
   }
 

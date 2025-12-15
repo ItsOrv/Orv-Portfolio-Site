@@ -64,3 +64,6 @@ Desktop.ini
 *.temp
 *.bak
 *.backup
+
+# Reports and documentation (keep only essential)
+# Keep: README.md, TODO.md, OG_IMAGE_INSTRUCTIONS.md

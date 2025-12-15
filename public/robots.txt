@@ -1,0 +1,12 @@
+# robots.txt for Orv Portfolio Site
+
+User-agent: *
+Allow: /
+
+# Sitemap location
+Sitemap: https://itsorv.github.io/Orv-Portfolio-Site/sitemap.xml
+
+# Disallow specific paths if needed
+# Disallow: /admin/
+# Disallow: /private/
+

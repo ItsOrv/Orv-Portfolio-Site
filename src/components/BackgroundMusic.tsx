@@ -30,6 +30,8 @@ const BackgroundMusic = () => {
         audioRef.current = null
       }
     }
+    // Intentionally empty - audio initialization should only run once
+    // Volume is set initially but changes are handled in separate effect
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
