@@ -1,21 +1,65 @@
-import { motion } from 'framer-motion'
-import { useState } from 'react'
-import { projects } from '../content'
+import { motion, AnimatePresence } from 'framer-motion'
+import { useState, useEffect } from 'react'
+import { projects as projectsContent } from '../content'
 import { getFeaturedProjects } from '../data/projects'
 import type { Project } from '../types/project'
-import { X, Github, Globe, Youtube, Users, Code, CheckCircle, Target } from 'lucide-react'
+import { X, Github, Globe, Youtube, Users, Code, CheckCircle, Target, Image as ImageIcon, ChevronLeft, ChevronRight } from 'lucide-react'
 
 const ProjectsSection = () => {
   const featuredProjects = getFeaturedProjects()
   const [selectedProject, setSelectedProject] = useState<Project | null>(null)
+  const [selectedScreenshotIndex, setSelectedScreenshotIndex] = useState(0)
 
   const toggleProjectDetails = (project: Project) => {
     if (selectedProject?.id === project.id) {
       // If same project is clicked, close it
       setSelectedProject(null)
+      setSelectedScreenshotIndex(0)
     } else {
       // Open new project details
       setSelectedProject(project)
+      setSelectedScreenshotIndex(0)
+    }
+  }
+
+  // Handle keyboard navigation
+  useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (!selectedProject) return
+
+      if (e.key === 'Escape') {
+        setSelectedProject(null)
+        setSelectedScreenshotIndex(0)
+      }
+
+      // Navigate screenshots with arrow keys
+      if (selectedProject.screenshots && selectedProject.screenshots.length > 0) {
+        if (e.key === 'ArrowLeft') {
+          setSelectedScreenshotIndex((prev) => 
+            prev > 0 ? prev - 1 : selectedProject.screenshots.length - 1
+          )
+        } else if (e.key === 'ArrowRight') {
+          setSelectedScreenshotIndex((prev) => 
+            prev < selectedProject.screenshots.length - 1 ? prev + 1 : 0
+          )
+        }
+      }
+    }
+
+    window.addEventListener('keydown', handleKeyDown)
+    return () => window.removeEventListener('keydown', handleKeyDown)
+  }, [selectedProject])
+
+  // Extract YouTube video ID from URL
+  const getYouTubeEmbedUrl = (url: string | undefined): string | null => {
+    if (!url || typeof url !== 'string') return null
+    try {
+      const regExp = /^.*(youtu.be\/|v\/|u\/\w\/|embed\/|watch\?v=|&v=)([^#&?]*).*/
+      const match = url.match(regExp)
+      return match && match[2] && match[2].length === 11 ? `https://www.youtube.com/embed/${match[2]}` : null
+    } catch (error) {
+      console.warn('Failed to parse YouTube URL:', error)
+      return null
     }
   }
 
@@ -29,18 +73,33 @@ const ProjectsSection = () => {
           viewport={{ once: true }}
           className="text-center mb-16"
         >
-          <h2 className="heading-section mb-8">{projects.heading}</h2>
+          <h2 className="heading-section mb-8">{projectsContent.heading}</h2>
           <p className="subheading-executive mx-auto">
-            {projects.subheading}
+            {projectsContent.subheading}
           </p>
         </motion.div>
 
         <div className="space-y-8">
-          {featuredProjects.map((project) => (
+          {featuredProjects.length === 0 ? (
+            <div className="premium-card text-center py-12">
+              <p className="text-slate-400">No featured projects available at the moment.</p>
+            </div>
+          ) : (
+            featuredProjects.map((project) => (
             <div
               key={project.id}
               className="project-showcase hover-lift-executive group cursor-pointer"
               onClick={() => toggleProjectDetails(project)}
+              onKeyDown={(e) => {
+                if (e.key === 'Enter' || e.key === ' ') {
+                  e.preventDefault()
+                  toggleProjectDetails(project)
+                }
+              }}
+              role="button"
+              tabIndex={0}
+              aria-label={`View details for ${project.title}`}
+              aria-expanded={selectedProject?.id === project.id}
             >
               <div className="premium-card-content">
                 {/* Project Header - Always Visible */}
@@ -50,9 +109,16 @@ const ProjectsSection = () => {
                   </h3>
                   <div className="flex items-center gap-2">
                     <span className={`badge-${project.status === 'completed' ? 'executive' : 'premium'}`}>
-                      {project.status.replace('-', ' ').toUpperCase()}
+                      {project.status ? project.status.replace('-', ' ').toUpperCase() : 'UNKNOWN'}
                     </span>
-                    <button className="text-slate-400 hover:text-white transition-colors">
+                    <button 
+                      className="text-slate-400 hover:text-white transition-colors focus:outline-none focus:ring-2 focus:ring-blue-500 rounded"
+                      onClick={(e) => {
+                        e.stopPropagation()
+                        toggleProjectDetails(project)
+                      }}
+                      aria-label={selectedProject?.id === project.id ? 'Close project details' : 'Open project details'}
+                    >
                       {selectedProject?.id === project.id ? (
                         <X className="w-5 h-5" />
                       ) : (
@@ -69,17 +135,25 @@ const ProjectsSection = () => {
                 </p>
                 
                 <div className="flex flex-wrap gap-2 mb-6">
-                  {project.technologies.slice(0, 4).map((tech) => (
-                    <span
-                      key={tech}
-                      className="px-3 py-1 bg-slate-800/50 text-slate-300 text-sm rounded-full"
-                    >
-                      {tech}
-                    </span>
-                  ))}
-                  {project.technologies.length > 4 && (
-                    <span className="px-3 py-1 bg-slate-700/50 text-slate-400 text-sm rounded-full">
-                      +{project.technologies.length - 4} more
+                  {project.technologies && project.technologies.length > 0 ? (
+                    <>
+                      {project.technologies.slice(0, 4).map((tech) => (
+                        <span
+                          key={tech}
+                          className="px-3 py-1 bg-slate-800/50 text-slate-300 text-sm rounded-full"
+                        >
+                          {tech}
+                        </span>
+                      ))}
+                      {project.technologies.length > 4 && (
+                        <span className="px-3 py-1 bg-slate-700/50 text-slate-400 text-sm rounded-full">
+                          +{project.technologies.length - 4} more
+                        </span>
+                      )}
+                    </>
+                  ) : (
+                    <span className="px-3 py-1 bg-slate-800/50 text-slate-400 text-sm rounded-full">
+                      Technologies not specified
                     </span>
                   )}
                 </div>
@@ -112,30 +186,144 @@ const ProjectsSection = () => {
                           <Code className="w-5 h-5 text-blue-400" /> Technologies
                         </h4>
                         <div className="flex flex-wrap gap-2">
-                          {project.technologies.map((tech) => (
-                            <span key={tech} className="px-3 py-1 bg-slate-800/60 text-slate-200 text-sm rounded-full">
-                              {tech}
+                          {project.technologies && project.technologies.length > 0 ? (
+                            project.technologies.map((tech) => (
+                              <span key={tech} className="px-3 py-1 bg-slate-800/60 text-slate-200 text-sm rounded-full">
+                                {tech}
+                              </span>
+                            ))
+                          ) : (
+                            <span className="px-3 py-1 bg-slate-800/60 text-slate-400 text-sm rounded-full">
+                              Technologies not specified
                             </span>
-                          ))}
+                          )}
                         </div>
                       </div>
+
+                      {/* Screenshots Gallery */}
+                      {project.screenshots && project.screenshots.length > 0 && (
+                        <div>
+                          <h4 className="text-lg font-semibold text-white mb-3 flex items-center gap-2">
+                            <ImageIcon className="w-5 h-5 text-blue-400" /> Screenshots
+                          </h4>
+                          <div className="relative">
+                            <div className="relative overflow-hidden rounded-lg bg-slate-800/50 aspect-video">
+                              <AnimatePresence mode="wait">
+                                {project.screenshots[selectedScreenshotIndex] && (
+                                  <motion.img
+                                    key={selectedScreenshotIndex}
+                                    src={project.screenshots[selectedScreenshotIndex]}
+                                    alt={`${project.title} screenshot ${selectedScreenshotIndex + 1}`}
+                                    className="w-full h-full object-cover"
+                                    initial={{ opacity: 0 }}
+                                    animate={{ opacity: 1 }}
+                                    exit={{ opacity: 0 }}
+                                    transition={{ duration: 0.3 }}
+                                    onError={(e) => {
+                                      const target = e.target as HTMLImageElement
+                                      target.style.display = 'none'
+                                    }}
+                                  />
+                                )}
+                              </AnimatePresence>
+                              
+                              {project.screenshots.length > 1 && (
+                                <>
+                                  <button
+                                    onClick={() => setSelectedScreenshotIndex((prev) => 
+                                      prev > 0 ? prev - 1 : project.screenshots.length - 1
+                                    )}
+                                    className="absolute left-2 top-1/2 -translate-y-1/2 p-2 bg-slate-900/80 hover:bg-slate-800 rounded-full text-white transition-all focus:outline-none focus:ring-2 focus:ring-blue-500"
+                                    aria-label="Previous screenshot"
+                                  >
+                                    <ChevronLeft className="w-5 h-5" />
+                                  </button>
+                                  <button
+                                    onClick={() => setSelectedScreenshotIndex((prev) => 
+                                      prev < project.screenshots.length - 1 ? prev + 1 : 0
+                                    )}
+                                    className="absolute right-2 top-1/2 -translate-y-1/2 p-2 bg-slate-900/80 hover:bg-slate-800 rounded-full text-white transition-all focus:outline-none focus:ring-2 focus:ring-blue-500"
+                                    aria-label="Next screenshot"
+                                  >
+                                    <ChevronRight className="w-5 h-5" />
+                                  </button>
+                                  <div className="absolute bottom-2 left-1/2 -translate-x-1/2 flex gap-2">
+                                    {project.screenshots.map((_, index) => (
+                                      <button
+                                        key={index}
+                                        onClick={() => setSelectedScreenshotIndex(index)}
+                                        className={`w-2 h-2 rounded-full transition-all focus:outline-none focus:ring-2 focus:ring-blue-500 ${
+                                          index === selectedScreenshotIndex
+                                            ? 'bg-blue-500 w-6'
+                                            : 'bg-slate-600 hover:bg-slate-500'
+                                        }`}
+                                        aria-label={`Go to screenshot ${index + 1}`}
+                                      />
+                                    ))}
+                                  </div>
+                                </>
+                              )}
+                            </div>
+                            <p className="text-xs text-slate-500 mt-2 text-center">
+                              {selectedScreenshotIndex + 1} / {project.screenshots.length}
+                            </p>
+                          </div>
+                        </div>
+                      )}
+
+                      {/* Video Embed */}
+                      {project.videoUrl && getYouTubeEmbedUrl(project.videoUrl) && (
+                        <div>
+                          <h4 className="text-lg font-semibold text-white mb-3 flex items-center gap-2">
+                            <Youtube className="w-5 h-5 text-red-400" /> Demo Video
+                          </h4>
+                          <div className="relative overflow-hidden rounded-lg bg-slate-800/50 aspect-video">
+                            <iframe
+                              src={getYouTubeEmbedUrl(project.videoUrl) || ''}
+                              title={`${project.title} demo video`}
+                              className="w-full h-full"
+                              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                              allowFullScreen
+                              loading="lazy"
+                            />
+                          </div>
+                        </div>
+                      )}
 
                       {/* Links */}
                       <div>
                         <h4 className="text-lg font-semibold text-white mb-3">Links</h4>
                         <div className="flex flex-wrap gap-3">
                           {project.githubUrl && (
-                            <a href={project.githubUrl} target="_blank" rel="noopener noreferrer" className="btn-executive-sm flex items-center gap-2">
+                            <a 
+                              href={project.githubUrl} 
+                              target="_blank" 
+                              rel="noopener noreferrer" 
+                              className="btn-executive-sm flex items-center gap-2"
+                              aria-label={`View ${project.title} on GitHub`}
+                            >
                               <Github className="w-4 h-4" /> GitHub
                             </a>
                           )}
                           {project.liveUrl && (
-                            <a href={project.liveUrl} target="_blank" rel="noopener noreferrer" className="btn-executive-sm flex items-center gap-2">
+                            <a 
+                              href={project.liveUrl} 
+                              target="_blank" 
+                              rel="noopener noreferrer" 
+                              className="btn-executive-sm flex items-center gap-2"
+                              aria-label={`View live demo of ${project.title}`}
+                            >
                               <Globe className="w-4 h-4" /> Live Demo
                             </a>
                           )}
-                          {project.videoUrl && (
-                            <a href={project.videoUrl} target="_blank" rel="noopener noreferrer" className="btn-executive-sm flex items-center gap-2">
+                          {project.videoUrl && !getYouTubeEmbedUrl(project.videoUrl) && (
+                            <a 
+                              href={project.videoUrl} 
+                              target="_blank" 
+                              rel="noopener noreferrer" 
+                              className="btn-executive-sm flex items-center gap-2"
+                              aria-label={`Watch demo video of ${project.title}`}
+                            >
                               <Youtube className="w-4 h-4" /> Demo Video
                             </a>
                           )}
@@ -208,7 +396,8 @@ const ProjectsSection = () => {
                 )}
               </div>
             </div>
-          ))}
+            ))
+          )}
         </div>
       </div>
 
