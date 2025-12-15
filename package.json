@@ -6,7 +6,7 @@
   "homepage": "https://itsorv.github.io/Orv-Portfolio-Site",
   "scripts": {
     "dev": "vite",
-    "build": "tsc -b && vite build",
+    "build": "tsc -b tsconfig.app.json tsconfig.node.json && vite build",
     "lint": "eslint .",
     "preview": "vite preview",
     "predeploy": "npm run build",
