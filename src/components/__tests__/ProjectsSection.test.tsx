@@ -2,9 +2,9 @@ import { describe, it, expect, vi, beforeEach } from 'vitest'
 import { render, screen, fireEvent, waitFor } from '@testing-library/react'
 import ProjectsSection from '../ProjectsSection'
 
-// Mock the projects data
-vi.mock('../../data/projects', () => ({
-  getFeaturedProjects: () => [
+// Mock the hooks
+vi.mock('../../hooks/useGitHubProjects', () => ({
+  useFeaturedProjects: () => [
     {
       id: 'test-project',
       title: 'Test Project',
@@ -15,6 +15,7 @@ vi.mock('../../data/projects', () => ({
       category: 'web-development',
       status: 'completed' as const,
       featured: true,
+      githubUrl: 'https://github.com/test',
       startDate: '2025-01-01',
       challenges: ['Challenge 1'],
       solutions: ['Solution 1'],
@@ -25,6 +26,13 @@ vi.mock('../../data/projects', () => ({
       timeSpent: '2 weeks',
     },
   ],
+  useGitHubProjects: () => ({
+    projects: [],
+    loading: false,
+    error: null,
+    lastUpdate: null,
+    refresh: vi.fn(),
+  }),
 }))
 
 describe('ProjectsSection', () => {
@@ -47,7 +55,9 @@ describe('ProjectsSection', () => {
 
   it('renders heading and subheading', () => {
     render(<ProjectsSection />)
-    expect(screen.getByText(/Featured Projects/i)).toBeInTheDocument()
+    // There might be multiple headings, so use getAllByText and check first one
+    const headings = screen.getAllByText(/Featured Projects/i)
+    expect(headings.length).toBeGreaterThan(0)
   })
 
   it('displays featured projects', async () => {

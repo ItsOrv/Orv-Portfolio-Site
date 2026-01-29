@@ -8,8 +8,9 @@ import { aiPdfTranslate } from './ai-pdf-translate'
 import { aiShopAssistant } from './ai-shop-assistant'
 import { orvHub } from './orv-hub'
 
-// Export all projects
-export const projects: Project[] = [
+// Static projects (manually defined)
+// GitHub projects are handled by useGitHubProjects hook
+export const staticProjects: Project[] = [
   telegramBotManager,
   cybersecurityDashboard,
   aiAutomationTool,
@@ -19,6 +20,9 @@ export const projects: Project[] = [
   aiShopAssistant,
   orvHub
 ]
+
+// Export static projects (GitHub projects are merged in the hook)
+export const projects: Project[] = staticProjects
 
 // Export individual projects
 export { 
@@ -66,7 +70,9 @@ export const getProjectById = (id: string): Project | undefined => {
 }
 
 export const getFeaturedProjects = (): Project[] => {
-  return projects.filter(project => project.featured)
+  // Return static featured projects only
+  // GitHub projects are handled by useFeaturedProjects hook
+  return staticProjects.filter(project => project.featured)
 }
 
 export const getProjectsByCategory = (category: string): Project[] => {

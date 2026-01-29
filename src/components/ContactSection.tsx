@@ -42,10 +42,10 @@ const ContactSection = () => {
         viewport={{ once: true }}
         className="max-w-2xl mx-auto"
       >
-        <div className="premium-card">
-          <div className="premium-card-content">
+        <div className="premium-card" style={{ overflow: 'visible', padding: '3rem' }}>
+          <div className="premium-card-content" style={{ overflow: 'visible' }}>
             <h3 className="text-2xl font-bold text-slate-200 mb-8 text-center">Get In Touch</h3>
-            <div className="space-y-4">
+            <div className="space-y-4" style={{ overflow: 'visible', padding: '1rem' }}>
               {contactInfo && contactInfo.length > 0 ? (
                 contactInfo.map((item) => (
                 <a
@@ -54,10 +54,14 @@ const ContactSection = () => {
                   target={item.type === 'email' ? '_self' : '_blank'}
                   rel={item.type === 'email' ? '' : 'noopener noreferrer'}
                   className="contact-button group block p-4 bg-slate-800/30 hover:bg-slate-700/40 
-                           rounded-xl transition-all duration-300 hover:scale-[1.02] hover:shadow-lg
-                           border border-slate-700/30 hover:border-slate-600/50 hover:shadow-glow-blue
-                           text-decoration-none"
-                  style={{ textDecoration: 'none' }}
+                           rounded-xl transition-all duration-300 hover:scale-[1.01] hover:shadow-xl
+                           border border-slate-700/30 hover:border-slate-600/50
+                           text-decoration-none relative z-10 hover:z-20"
+                  style={{ 
+                    textDecoration: 'none', 
+                    transformOrigin: 'center',
+                    margin: '0.25rem'
+                  }}
                 >
                   <div className="flex items-center justify-between">
                     <div className="flex items-center space-x-4">

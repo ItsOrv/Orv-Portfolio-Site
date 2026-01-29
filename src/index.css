@@ -119,12 +119,24 @@
 @layer components {
   /* Ultra-premium card system */
   .premium-card {
-    @apply relative bg-slate-900/40 backdrop-blur-xl border border-slate-800/50 rounded-2xl p-8
+    @apply relative bg-slate-900/40 backdrop-blur-xl border border-slate-800/50 rounded-2xl
            shadow-xl hover:shadow-2xl transition-all duration-300 ease-out
-           hover:bg-slate-900/60 hover:border-slate-700/50 overflow-hidden;
+           hover:bg-slate-900/60 hover:border-slate-700/50;
     /* Performance optimizations */
     will-change: transform, box-shadow;
     transform: translateZ(0);
+    /* Default overflow, can be overridden */
+    overflow: hidden;
+    /* Padding with extra space for hover effects */
+    padding: 2rem;
+  }
+
+  /* Allow overflow for cards with hover scale effects */
+  .premium-card.overflow-visible,
+  .premium-card[style*="overflow: visible"] {
+    overflow: visible !important;
+    /* Add extra padding to prevent clipping on scale */
+    padding: 3rem !important;
   }
 
   .premium-card::before {
@@ -135,6 +147,12 @@
 
   .premium-card-content {
     @apply relative z-10;
+  }
+
+  /* Allow overflow for content with hover scale effects */
+  .premium-card-content.overflow-visible,
+  .premium-card-content[style*="overflow: visible"] {
+    overflow: visible !important;
   }
 
   /* Glass morphism cards */
@@ -315,19 +333,28 @@
            text-purple-300 border border-purple-500/20 backdrop-blur-sm;
   }
 
-  /* Contact button animations */
+  /* Contact button - Clean professional hover effect */
   .contact-button {
-    @apply relative overflow-hidden;
+    @apply relative;
+    overflow: visible;
+    position: relative;
   }
 
+  /* Elegant border highlight on hover */
   .contact-button::before {
     content: '';
-    @apply absolute inset-0 bg-gradient-to-r from-transparent via-white/5 to-transparent
-           transform -translate-x-full transition-transform duration-700 ease-out;
+    @apply absolute -inset-px rounded-xl opacity-0 transition-opacity duration-300;
+    background: linear-gradient(135deg, 
+      rgba(59, 130, 246, 0.3) 0%, 
+      rgba(99, 102, 241, 0.3) 50%, 
+      rgba(139, 92, 246, 0.3) 100%);
+    filter: blur(8px);
+    z-index: -1;
+    pointer-events: none;
   }
 
   .contact-button:hover::before {
-    @apply translate-x-full;
+    opacity: 1;
   }
 }
 

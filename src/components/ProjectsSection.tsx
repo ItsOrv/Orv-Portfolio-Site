@@ -1,12 +1,13 @@
 import { motion, AnimatePresence } from 'framer-motion'
 import { useState, useEffect } from 'react'
 import { projects as projectsContent } from '../content'
-import { getFeaturedProjects } from '../data/projects'
+import { useFeaturedProjects, useGitHubProjects } from '../hooks/useGitHubProjects'
 import type { Project } from '../types/project'
-import { X, Github, Globe, Youtube, Users, Code, CheckCircle, Target, Image as ImageIcon, ChevronLeft, ChevronRight } from 'lucide-react'
+import { X, Github, Globe, Youtube, Users, Code, CheckCircle, Target, Image as ImageIcon, ChevronLeft, ChevronRight, RefreshCw } from 'lucide-react'
 
 const ProjectsSection = () => {
-  const featuredProjects = getFeaturedProjects()
+  const featuredProjects = useFeaturedProjects()
+  const { loading, error, lastUpdate, refresh } = useGitHubProjects()
   const [selectedProject, setSelectedProject] = useState<Project | null>(null)
   const [selectedScreenshotIndex, setSelectedScreenshotIndex] = useState(0)
 
@@ -87,10 +88,32 @@ const ProjectsSection = () => {
           viewport={{ once: true }}
           className="text-center mb-16"
         >
-          <h2 className="heading-section mb-8">{projectsContent.heading}</h2>
+          <div className="flex items-center justify-center gap-4 mb-8">
+            <h2 className="heading-section">{projectsContent.heading}</h2>
+            <button
+              onClick={refresh}
+              disabled={loading}
+              className="p-2 rounded-lg bg-slate-800/50 hover:bg-slate-700/50 text-slate-400 hover:text-white transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-blue-500 disabled:opacity-50 disabled:cursor-not-allowed"
+              aria-label="Refresh projects from GitHub"
+              title={lastUpdate ? `Last updated: ${lastUpdate.toLocaleTimeString()}` : 'Refresh projects'}
+            >
+              <RefreshCw className={`w-5 h-5 ${loading ? 'animate-spin' : ''}`} />
+            </button>
+          </div>
           <p className="subheading-executive mx-auto">
             {projectsContent.subheading}
           </p>
+          {error && (
+            <div className="mt-4 p-3 bg-red-500/10 border border-red-500/20 rounded-lg text-red-400 text-sm">
+              Error loading projects: {error}
+            </div>
+          )}
+          {loading && (
+            <div className="mt-4 text-slate-400 text-sm flex items-center justify-center gap-2">
+              <RefreshCw className="w-4 h-4 animate-spin" />
+              Loading projects from GitHub...
+            </div>
+          )}
         </motion.div>
 
         <div className="space-y-8">
